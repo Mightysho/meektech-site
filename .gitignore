@@ -51,3 +51,4 @@ htmlcov/
 requirements.txt
 theme/
 geoip/
+*.mmdb
