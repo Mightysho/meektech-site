@@ -1,0 +1,71 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Welcome{% endblock %} | Meek Technology</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% tailwind_css %}
+  <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'images/logo3.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/logo3.png' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  {% include "components/navbar.html" %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "components/footer.html" %}
+
+<!-- WhatsApp Floating Icon -->
+  <a href="https://wa.me/2349029575266?text=Hello%20Meek%20Technology,%20I%20visited%20your%20website%20and%20I'd%20like%20to%20make%20an%20enquiry."
+    target="_blank"
+    class="fixed bottom-6 left-6 bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg z-50">
+
+    <img src="{% static 'images/whatsapp-icon.svg' %}" class="h-6 w-6">
+  </a>
+
+<!-- GPS Location Settings -->
+  <script>
+  (function(){
+    try {
+      if (!('geolocation' in navigator)) return;
+      if (localStorage.getItem('geo_reported_v1')) return;
+
+      navigator.geolocation.getCurrentPosition(function(pos){
+        var lat = pos.coords.latitude;
+        var lng = pos.coords.longitude;
+
+        function getCookie(name){
+          var v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+          return v ? v.pop() : '';
+        }
+
+        var visitor_id = getCookie('visitor_id') || null;
+
+        var payload = { latitude: lat, longitude: lng };
+        if (visitor_id) payload.visitor_id = visitor_id;
+
+        fetch('/api/visitor-location/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        }).catch(function(){});
+
+        localStorage.setItem('geo_reported_v1','1');
+      }, function(err){
+        localStorage.setItem('geo_reported_v1','denied');
+      }, { maximumAge: 600000, timeout: 10000 });
+    } catch(e) {}
+  })();
+  </script>
+</body>
+</html>

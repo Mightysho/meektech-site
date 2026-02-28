@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Auth{% endblock %} | Meek Technology Admin</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="NONE,NOARCHIVE" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/logo3.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/logo3.png' %}">
+
+    <!-- Spectra CSS -->
+    <link href="{% static 'spectra/css/app.min.css' %}" rel="stylesheet">
+    <link href="{% static 'spectra/css/icons.min.css' %}" rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+
+</head>
+
+<body class="authentication-bg">
+    {% block content %}{% endblock %}
+    
+    <!-- Spectra JS -->
+    <script src="{% static 'spectra/js/vendors.min.js' %}"></script>
+    <script src="{% static 'spectra/js/app.min.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

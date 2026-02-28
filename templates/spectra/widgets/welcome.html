@@ -1,0 +1,41 @@
+{% load i18n %}
+
+<div class="spectra-widget welcome-widget">
+    <div class="widget-content welcome-content">
+        <div class="welcome-icon">👋</div>
+        <h2 class="welcome-title">{% trans "Hello" %}</h2>
+        <div class="welcome-user">
+            <div class="welcome-name" title="{{ user.get_full_name|default:user.username }}">
+                {{ user.first_name }} {{ user.last_name }}{% if not user.first_name and not user.last_name %}{{ user.username }}{% endif %}
+            </div>
+            <div class="welcome-role">
+                {% if user.is_superuser %}
+                    {% trans "Superuser" %}
+                {% else %}
+                    {% with g=user.groups.first %}
+                        {% if g %}{{ g.name }}{% else %}{% trans "User" %}{% endif %}
+                    {% endwith %}
+                {% endif %}
+            </div>
+        </div>
+        <p class="welcome-message">{{ welcome_message }}</p>
+    </div>
+</div>
+
+<style>
+    .welcome-user { margin-top: .25rem; }
+    .welcome-name {
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 22rem;
+    }
+    .welcome-role {
+        font-size: .875rem;
+        color: var(--text-secondary, #6b7280);
+    }
+    @media (max-width: 768px) {
+        .welcome-name { max-width: 14rem; }
+    }
+</style>

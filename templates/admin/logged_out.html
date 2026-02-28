@@ -1,0 +1,22 @@
+{% load i18n static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% trans "Logged out" %}</title>
+    <link rel="stylesheet" href="{% static 'spectra/css/app.css' %}">
+</head>
+
+<body class="logout-page">
+
+<div class="logout-box text-center">
+    <h2>You have been logged out</h2>
+    <p>Thank you for using MeekTech Admin</p>
+
+    <a href="{% url 'admin:login' %}" class="btn btn-primary">
+        Log in again
+    </a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light" data-menu-color="dark" data-topbar-color="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Meek Technology</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Django Admin Dashboard">
+    <meta name="author" content="Django Spectra">
+    
+    <!-- Favicon -->
+    
+        
+    <link rel="icon" href="/media/spectra/favicons/meektech-favicon.png">
+        
+    
+    
+    
+    
+    <!-- App CSS -->
+    <link href="/static/spectra/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/spectra/css/icons.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Custom User Styles -->
+    
+    <link rel="stylesheet" href="/static/css/custom-admin.css">
+    
+    
+    <!-- Theme Configuration - Load with defer to ensure DOM is ready -->
+    <script defer src="/static/spectra/js/config.min.js"></script>
+    <script defer src="/static/spectra/js/layout.min.js"></script>
+    
+    
+</head>
+
+<body>
+    
+    
+    
+    <!-- Wrapper -->
+    <div class="wrapper">
+        
+        <!-- ========== Topbar Start ========== -->
+        
+
+<header class="">
+    <div class="topbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Menu Toggle Button -->
+                    <div class="topbar-item">
+                        <button type="button" class="button-toggle-menu topbar-button">
+                            <i class="ri-menu-2-line fs-24"></i>
+                        </button>
+                    </div>
+
+                    <!-- App Search-->
+                    <form class="app-search d-none d-md-block me-auto">
+                        <div class="position-relative">
+                            <input type="search" class="form-control border-0" placeholder="Search..." autocomplete="off" value="">
+                            <i class="ri-search-line search-widget-icon"></i>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                    <!-- Theme Color (Light/Dark) -->
+                    <div class="topbar-item">
+                        <button type="button" class="topbar-button" id="light-dark-mode">
+                            <i class="ri-moon-line fs-24 light-mode"></i>
+                            <i class="ri-sun-line fs-24 dark-mode"></i>
+                        </button>
+                    </div>
+
+                    <!-- Fullscreen -->
+                    <div class="dropdown topbar-item d-none d-lg-flex">
+                        <button type="button" class="topbar-button" data-toggle="fullscreen">
+                            <i class="ri-fullscreen-line fs-24 fullscreen"></i>
+                            <i class="ri-fullscreen-exit-line fs-24 quit-fullscreen"></i>
+                        </button>
+                    </div>
+
+                    <!-- Notification -->
+                    <div class="dropdown topbar-item">
+                        <button type="button" class="topbar-button position-relative" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ri-notification-3-line fs-24"></i>
+                            <span class="position-absolute topbar-badge fs-10 translate-middle badge bg-danger rounded-pill">0<span class="visually-hidden">unread messages</span></span>
+                        </button>
+                        <div class="dropdown-menu py-0 dropdown-lg dropdown-menu-end" aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3 border-top-0 border-start-0 border-end-0 border-dashed border">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h6 class="m-0 fs-16 fw-semibold">Notifications</h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                            <small>Clear All</small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 280px;">
+                                <div class="text-center p-4">
+                                    <p class="text-muted mb-0">No new notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Theme Setting -->
+                    <div class="topbar-item d-none d-md-flex">
+                        <button type="button" class="topbar-button" id="theme-settings-btn" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas">
+                            <i class="ri-settings-4-line fs-24"></i>
+                        </button>
+                    </div>
+
+                    <!-- User -->
+                    <div class="dropdown topbar-item">
+                        <a type="button" class="topbar-button" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="d-flex align-items-center">
+                                
+                                <span class="avatar-sm rounded-circle bg-primary text-white d-flex align-items-center justify-content-center">
+                                    D
+                                </span>
+                                
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            
+                            <h6 class="dropdown-header">Welcome devtest!</h6>
+                            
+                            <a class="dropdown-item" href="/admin/">
+                                <i class="ri-dashboard-line align-middle me-2 fs-18"></i><span class="align-middle">Dashboard</span>
+                            </a>
+
+                            
+                            <a class="dropdown-item" href="/admin/">
+                                <i class="ri-settings-3-line align-middle me-2 fs-18"></i><span class="align-middle">Admin</span>
+                            </a>
+                            
+
+                            <div class="dropdown-divider my-1"></div>
+
+                            <a class="dropdown-item text-danger" href="/admin/logout/">
+                                <i class="ri-logout-box-line align-middle me-2 fs-18"></i><span class="align-middle">Logout</span>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <!-- ========== Topbar End ========== -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        
+
+<div class="main-nav">
+    <!-- Sidebar Logo -->
+    <div class="logo-box">
+        <a href="/admin/" class="logo-dark">
+            
+            <img src="/media/spectra/logos/meektech-logo-sm.jpg" class="logo-sm" alt="logo sm">
+            
+            
+            
+            <img src="/media/spectra/logos/meektech-logo2.png" class="logo-lg" alt="logo dark">
+            
+        </a>
+
+        <a href="/admin/" class="logo-light">
+            
+            <img src="/media/spectra/logos/meektech-logo-sm.jpg" class="logo-sm" alt="logo sm">
+            
+            
+            
+            <img src="/media/spectra/logos/meektech-logo.png" class="logo-lg" alt="logo light">
+            
+        </a>
+    </div>
+
+    <!-- Menu Toggle Button (sm-hover) -->
+    <button type="button" class="button-sm-hover" aria-label="Show Full Sidebar">
+        <i class="ri-menu-2-line fs-24 button-sm-hover-icon"></i>
+    </button>
+
+    <div class="scrollbar" data-simplebar>
+
+        <ul class="navbar-nav" id="navbar-nav">
+
+            <li class="menu-title">Navigation</li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/">
+                    <span class="nav-icon">
+                        <i class="ri-dashboard-2-line"></i>
+                    </span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+            </li>
+
+            
+            <li class="menu-title">Applications</li>
+            
+            
+            <li class="nav-item">
+                
+                    
+                    <a class="nav-link menu-arrow" href="#sidebarauth" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarauth">
+                        <span class="nav-icon">
+                            <i class="ri-apps-2-line"></i>
+                        </span>
+                        <span class="nav-text">Auth and Authorization</span>
+                    </a>
+                    <div class="collapse" id="sidebarauth">
+                        <ul class="nav sub-navbar-nav">
+                            
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="/admin/auth/group/">
+                                    Groups
+                                </a>
+                            </li>
+                            
+                            <li class="sub-nav-item">
+                                <a class="sub-nav-link" href="/admin/auth/user/">
+                                    Users
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                
+            </li>
+            
+            <li class="nav-item">
+                
+                    
+                    
+                    <a class="nav-link" href="/admin/spectra/sitesettings/">
+                        <span class="nav-icon">
+                            <i class="ri-file-list-3-line"></i>
+                        </span>
+                        <span class="nav-text">Site Settings</span>
+                    </a>
+                    
+                
+            </li>
+            
+            <li class="nav-item">
+                
+                    
+                    
+                    <a class="nav-link" href="/admin/core/visitor/">
+                        <span class="nav-icon">
+                            <i class="ri-file-list-3-line"></i>
+                        </span>
+                        <span class="nav-text">Visitors</span>
+                    </a>
+                    
+                
+            </li>
+            
+            <li class="nav-item">
+                
+                    
+                    
+                    <a class="nav-link" href="/admin/sites/site/">
+                        <span class="nav-icon">
+                            <i class="ri-file-list-3-line"></i>
+                        </span>
+                        <span class="nav-text">Website Domains IDs</span>
+                    </a>
+                    
+                
+            </li>
+            
+            
+
+            <!-- System Section -->
+            <li class="menu-title">System</li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/">
+                    <span class="nav-icon">
+                        <i class="ri-settings-3-line"></i>
+                    </span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </li>
+
+            
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/logout/">
+                    <span class="nav-icon">
+                        <i class="ri-logout-box-line"></i>
+                    </span>
+                    <span class="nav-text">Logout</span>
+                </a>
+            </li>
+            
+
+        </ul>
+    </div>
+</div>
+
+        <!-- ========== Left Sidebar End ========== -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="page-content">
+            
+            <div class="container-fluid">
+                
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    
+                    
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/admin/">Dashboard</a></li>
+                                            
+    <li class="breadcrumb-item active">Dashboard</li>
+
+                                        </ol>
+                                    </nav>
+                                    
+                                </div>
+                                <h4 class="page-title">
+    Dashboard
+</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                    
+                    
+                    <!-- Messages -->
+                    
+                    
+                    
+
+<!-- Stats Cards -->
+<div class="row mb-4">
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-6">
+                        <div class="avatar-md bg-light bg-opacity-50 rounded">
+                            <i class="ri-database-2-line fs-32 text-primary avatar-title d-flex align-items-center justify-content-center"></i>
+                        </div>
+                        <p class="text-muted mb-2 mt-3">Total Models</p>
+                        <h3 class="text-dark fw-bold mb-0">
+                            4
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-6">
+                        <div class="avatar-md bg-light bg-opacity-50 rounded">
+                            <i class="ri-apps-2-line fs-32 text-success avatar-title d-flex align-items-center justify-content-center"></i>
+                        </div>
+                        <p class="text-muted mb-2 mt-3">Applications</p>
+                        <h3 class="text-dark fw-bold mb-0">
+                            4
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-6">
+                        <div class="avatar-md bg-light bg-opacity-50 rounded">
+                            <i class="ri-user-line fs-32 text-info avatar-title d-flex align-items-center justify-content-center"></i>
+                        </div>
+                        <p class="text-muted mb-2 mt-3">Welcome</p>
+                        <h3 class="text-dark fw-bold mb-0" style="font-size: 1.2rem;">
+                            devtest
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-6">
+                        <div class="avatar-md bg-light bg-opacity-50 rounded">
+                            <i class="ri-shield-user-line fs-32 text-warning avatar-title d-flex align-items-center justify-content-center"></i>
+                        </div>
+                        <p class="text-muted mb-2 mt-3">Role</p>
+                        <h3 class="text-dark fw-bold mb-0" style="font-size: 1.2rem;">
+                            Superuser
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Applications Grid -->
+<div class="row">
+    
+    <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-gradient border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0 text-white">
+                            <i class="ri-apps-2-line me-2"></i>Auth and Authorization
+                        </h5>
+                    </div>
+                    <div class="badge bg-white text-primary">
+                        2 models
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                <div class="avatar-sm bg-light rounded">
+                                    <i class="ri-file-list-3-line fs-20 text-primary d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">
+                                        <a href="/admin/auth/group/" class="text-dark text-decoration-none">
+                                            Groups
+                                        </a>
+                                    </h6>
+                                    <p class="text-muted mb-0 small">
+                                        
+                                            <a href="/admin/auth/group/add/" class="text-muted text-decoration-none">
+                                                <i class="ri-add-line"></i> Add
+                                            </a>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-1">
+                                
+                                <a href="/admin/auth/group/" class="btn btn-sm btn-light" title="View">
+                                    <i class="ri-list-check"></i>
+                                </a>
+                                
+                                
+                                <a href="/admin/auth/group/add/" class="btn btn-sm btn-soft-primary" title="Add">
+                                    <i class="ri-add-line"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                <div class="avatar-sm bg-light rounded">
+                                    <i class="ri-file-list-3-line fs-20 text-primary d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">
+                                        <a href="/admin/auth/user/" class="text-dark text-decoration-none">
+                                            Users
+                                        </a>
+                                    </h6>
+                                    <p class="text-muted mb-0 small">
+                                        
+                                            <a href="/admin/auth/user/add/" class="text-muted text-decoration-none">
+                                                <i class="ri-add-line"></i> Add
+                                            </a>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-1">
+                                
+                                <a href="/admin/auth/user/" class="btn btn-sm btn-light" title="View">
+                                    <i class="ri-list-check"></i>
+                                </a>
+                                
+                                
+                                <a href="/admin/auth/user/add/" class="btn btn-sm btn-soft-primary" title="Add">
+                                    <i class="ri-add-line"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-gradient border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0 text-white">
+                            <i class="ri-apps-2-line me-2"></i>Django Spectra
+                        </h5>
+                    </div>
+                    <div class="badge bg-white text-primary">
+                        1 models
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                <div class="avatar-sm bg-light rounded">
+                                    <i class="ri-file-list-3-line fs-20 text-primary d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">
+                                        <a href="/admin/spectra/sitesettings/" class="text-dark text-decoration-none">
+                                            Site Settings
+                                        </a>
+                                    </h6>
+                                    <p class="text-muted mb-0 small">
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-1">
+                                
+                                <a href="/admin/spectra/sitesettings/" class="btn btn-sm btn-light" title="View">
+                                    <i class="ri-list-check"></i>
+                                </a>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-gradient border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0 text-white">
+                            <i class="ri-apps-2-line me-2"></i>Home and Visitor Tracking
+                        </h5>
+                    </div>
+                    <div class="badge bg-white text-primary">
+                        1 models
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                <div class="avatar-sm bg-light rounded">
+                                    <i class="ri-file-list-3-line fs-20 text-primary d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">
+                                        <a href="/admin/core/visitor/" class="text-dark text-decoration-none">
+                                            Visitors
+                                        </a>
+                                    </h6>
+                                    <p class="text-muted mb-0 small">
+                                        
+                                            <a href="/admin/core/visitor/add/" class="text-muted text-decoration-none">
+                                                <i class="ri-add-line"></i> Add
+                                            </a>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-1">
+                                
+                                <a href="/admin/core/visitor/" class="btn btn-sm btn-light" title="View">
+                                    <i class="ri-list-check"></i>
+                                </a>
+                                
+                                
+                                <a href="/admin/core/visitor/add/" class="btn btn-sm btn-soft-primary" title="Add">
+                                    <i class="ri-add-line"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-gradient border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0 text-white">
+                            <i class="ri-apps-2-line me-2"></i>Sites
+                        </h5>
+                    </div>
+                    <div class="badge bg-white text-primary">
+                        1 models
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    
+                    <div class="list-group-item border-0 py-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                <div class="avatar-sm bg-light rounded">
+                                    <i class="ri-file-list-3-line fs-20 text-primary d-flex align-items-center justify-content-center h-100"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">
+                                        <a href="/admin/sites/site/" class="text-dark text-decoration-none">
+                                            Website Domains IDs
+                                        </a>
+                                    </h6>
+                                    <p class="text-muted mb-0 small">
+                                        
+                                            <a href="/admin/sites/site/add/" class="text-muted text-decoration-none">
+                                                <i class="ri-add-line"></i> Add
+                                            </a>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-1">
+                                
+                                <a href="/admin/sites/site/" class="btn btn-sm btn-light" title="View">
+                                    <i class="ri-list-check"></i>
+                                </a>
+                                
+                                
+                                <a href="/admin/sites/site/add/" class="btn btn-sm btn-soft-primary" title="Add">
+                                    <i class="ri-add-line"></i>
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- Recent Actions -->
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-bottom">
+                <h5 class="card-title mb-0">
+                    <i class="ri-history-line me-2"></i>Quick Links
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <a href="/admin/auth/user/" class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center gap-2 py-3">
+                            <i class="ri-user-line fs-20"></i>
+                            <span>Manage Users</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/admin/auth/group/" class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center gap-2 py-3">
+                            <i class="ri-group-line fs-20"></i>
+                            <span>Manage Groups</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/admin/password_change/" class="btn btn-outline-warning w-100 d-flex align-items-center justify-content-center gap-2 py-3">
+                            <i class="ri-lock-password-line fs-20"></i>
+                            <span>Change Password</span>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/admin/" class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center gap-2 py-3">
+                            <i class="ri-settings-3-line fs-20"></i>
+                            <span>View Site</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.avatar-md {
+    width: 56px;
+    height: 56px;
+}
+
+.avatar-sm {
+    width: 40px;
+    height: 40px;
+}
+
+.avatar-title {
+    width: 100%;
+    height: 100%;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-soft-primary {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+    border: none;
+}
+
+.btn-soft-primary:hover {
+    background-color: rgba(13, 110, 253, 0.2);
+    color: #0d6efd;
+}
+
+/* Alternate gradient colors for cards */
+.card:nth-child(3n+1) .card-header.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.card:nth-child(3n+2) .card-header.bg-gradient {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+
+.card:nth-child(3n+3) .card-header.bg-gradient {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075) !important;
+}
+</style>
+
+
+
+                </div>
+                <!-- container-fluid -->
+
+            </div>
+            <!-- Footer Start -->
+            
+
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                2026 &copy; Meek Technology. 
+                
+                    All right reserved. Developed with ❤️ by Engr. Micheal Shokunbi
+                
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
+
+            <!-- end Footer -->
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Right Sidebar (Theme Customizer) -->
+    
+
+    <!-- Vendor js -->
+    <script defer src="/static/spectra/js/vendors.min.js"></script>
+
+    <!-- App js -->
+    <script defer src="/static/spectra/js/app.min.js"></script>
+
+    <!-- Custom User Scripts -->
+    
+    <script defer src="/static/js/custom-admin.js"></script>
+    
+
+    
+
+    <!-- Mobile Menu Toggle Fallback -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ensure mobile menu toggle works
+            const menuToggleBtn = document.querySelector('.button-toggle-menu');
+            const wrapper = document.querySelector('.wrapper');
+            
+            if (menuToggleBtn && wrapper) {
+                menuToggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    wrapper.classList.toggle('sidebar-enable');
+                });
+            }
+            
+            // Mobile overlay close
+            const pageContent = document.querySelector('.page-content');
+            if (pageContent) {
+                pageContent.addEventListener('click', function() {
+                    if (wrapper && wrapper.classList.contains('sidebar-enable')) {
+                        wrapper.classList.remove('sidebar-enable');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

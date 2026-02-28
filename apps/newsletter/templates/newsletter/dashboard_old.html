@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MeekTech Newsletter Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+      <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/logo3.png' %}">
+</head>
+
+<body class="bg-gray-100">
+
+<div class="max-w-7xl mx-auto p-6">
+
+    <h1 class="text-2xl text-center font-bold mb-6">MEEK Technology Newsletter Campaign Builder</h1>
+
+    <div class="grid grid-cols-2 gap-6">
+
+        <!-- LEFT SIDE -->
+        <div class="bg-white p-6 rounded shadow">
+
+            <label class="block font-semibold">Subject</label>
+            <input id="subject" class="w-full border p-2 mb-4">
+
+            <label class="block font-semibold">Reply To</label>
+            <input id="replyto" class="w-full border p-2 mb-4">
+
+            <label class="block font-semibold">Schedule Date & Time</label>
+            <input type="datetime-local" id="schedule" class="w-full border p-2 mb-4">
+
+            <label class="block font-semibold">Select Recipients</label>
+            <select multiple id="recipients" class="w-full border p-2 mb-4 h-40">
+                {% for sub in subscribers %}
+                    <option value="{{ sub.id }}">{{ sub.email }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="block font-semibold">HTML Editor</label>
+            <textarea id="editor" class="w-full border p-3 h-72"></textarea>
+
+            <button id="sendBtn"
+                class="mt-4 bg-green-600 text-white px-4 py-2 rounded">
+                Send Newsletter
+            </button>
+
+        </div>
+
+        <!-- RIGHT SIDE PREVIEW -->
+        <div class="bg-white p-6 rounded shadow">
+
+            <h2 class="font-semibold mb-4">Live Preview</h2>
+            <div id="preview" class="border p-4 min-h-[400px] bg-gray-50"></div>
+
+        </div>
+
+    </div>
+
+    <!-- IMAGE UPLOAD SECTION -->
+    <div class="bg-white p-6 rounded shadow mt-6">
+
+        <h2 class="font-semibold mb-4">Upload Image</h2>
+
+        <input type="file" id="imageUpload" class="mb-4">
+
+        <div class="grid grid-cols-4 gap-4">
+            {% for img in images %}
+                <div class="border p-2">
+                    <img src="{{ img.image.url }}" class="w-full">
+                    <p class="text-xs break-all">{{ img.image.url }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const editor = document.getElementById("editor");
+const preview = document.getElementById("preview");
+
+editor.addEventListener("input", () => {
+    preview.innerHTML = editor.value;
+});
+</script>
+
+</body>
+</html>

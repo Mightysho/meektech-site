@@ -1,0 +1,234 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Newsletter Dashboard | Meek Technology Admin{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center border-bottom">
+        <h1 class="mb-0">
+            Newsletter Dashboard
+        </h1>
+        <div class="d-flex gap-2">
+        <a href="/admin/newsletter/newslettercampaign/" class="btn btn-light btn-sm">
+            <i class="ri-arrow-left-line"></i> Back to List
+        </a>
+        </div>
+    </div>
+    
+    <div style="display:flex; gap:20px; margin-bottom:20px;" class="border-bottom">
+
+        <div class="module" style="flex:1; padding:20px;">
+            <h3>Total Campaigns</h3>
+            <h1>{{ total_campaigns }}</h1>
+        </div>
+
+        <div class="module" style="flex:1; padding:20px;">
+            <h3>Total Subscribers</h3>
+            <h1>{{ total_subscribers }}</h1>
+        </div>
+
+        <div class="module" style="flex:1; padding:20px;">
+            <h3>Open Rate</h3>
+            <h1>{{ open_rate }}%</h1>
+        </div>
+
+        <div class="module" style="flex:1; padding:20px;">
+            <h3>Failure Rate</h3>
+            <h1>{{ failure_rate }}%</h1>
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+    <h2 style="margin-bottom:20px;">Create New Campaign</h2>
+
+    <form method="post" action="{% url 'newsletter_dashboard' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <fieldset class="module aligned">
+
+            <div class="form-row" style="margin-bottom:20px;">
+                <label>Subject</label>
+                <input type="text" name="subject" style="width:60%;" required>
+            </div>
+
+            <div class="form-row" style="margin-bottom:20px;">
+                <label>Reply To</label>
+                <input type="email" name="reply_to" style="width:60%;">
+            </div>
+
+            <div class="form-row" style="margin-bottom:20px;">
+                <label>Schedule Time</label>
+                <input type="datetime-local" name="schedule_time">
+            </div>
+
+            <div class="form-row" style="margin-bottom:20px;">
+                <label>
+                    <input type="checkbox" name="send_to_all" id="send_to_all">
+                    Send to All Subscribers
+                </label>
+            </div>
+
+            <div class="form-row" id="subscriber_box" style="margin-bottom:20px;">
+                <label>Select Subscribers</label>
+
+                <div style="max-height:200px; overflow:auto; border:1px solid #ddd; padding:15px;">
+                    {% for sub in subscribers %}
+                        <div style="margin-bottom:8px;">
+                            <input type="checkbox" name="subscribers" value="{{ sub.id }}">
+                            {{ sub.email }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- <div class="form-row" style="margin-bottom:20px;">
+                <label>Upload Images</label>
+                <input type="file" name="images" multiple>
+            </div> -->
+
+            <div class="form-row" style="margin-bottom:20px;">
+                <label>HTML Content</label>
+                <textarea name="body_html" id="html_input" rows="15" style="width:100%;"></textarea>
+            </div>
+
+            <div class="form-row" style="margin-bottom:25px;">
+                <label>Live Preview</label>
+                <div id="preview_box" style="border:1px solid #ccc; padding:20px; background:#fff;" ></div>
+            </div>
+
+        </fieldset>
+
+        <button class="btn btn-outline-primary btn-sm" type="submit" style="padding:10px 15px;">
+            <i class="ri-add-line"></i>
+            Create Campaign
+            <i class="ri-file-list-2-line"></i>
+        </button>
+
+    </form>
+
+    <hr style="margin:40px 0;">
+
+    <h2 style="margin-bottom:20px;">Uploaded Images</h2>
+
+    <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+    {% for img in images %}
+        <div style="margin-bottom:20px; width:231px;">
+            <!-- Preview (click to open full-size) -->
+            <a href="{{ request.scheme }}://{{ request.get_host }}{{ img.image.url }}" target="_blank">
+                <img src="{{ img.image.url }}" width="225" 
+                    style="display:block; margin-bottom:8px; border-radius:8px; object-fit:cover; height:140px;"/>
+            </a>
+
+            <!-- URL Input -->
+            <input 
+                value="{{ request.scheme }}://{{ request.get_host }}{{ img.image.url }}" 
+                readonly 
+                onclick="copyToClipboard(this.value)"
+                style="width:225px; padding:6px; cursor:pointer;"
+            >
+
+        </div>
+    {% empty %}
+        <p>No images uploaded yet.</p>
+    {% endfor %}
+    </div>
+
+    <hr style="margin:40px 0;">
+
+    <h2 style="margin-bottom:20px;">Campaign History</h2>
+
+    <table class="admin-table" cellpadding="10" style="">
+        <tr style="color:#fff; border:2px solid grey; background:grey;">
+            <th>Subject</th>
+            <th>Created</th>
+            <th>Sent</th>
+            <th>Total Sent</th>
+            <th>Failed</th>
+        </tr>
+
+        {% for c in campaigns %}
+        <tr style="border:2px solid grey; padding:15px;">
+            <td style="border:2px solid grey;">{{ c.subject }}</td>
+            <td style="border:2px solid grey;">{{ c.created_at }}</td>
+            <td style="border:2px solid grey;">{{ c.sent_time|default:"Not Sent" }}</td>
+            <td style="border:2px solid grey;">{{ c.total_sent }}</td>
+            <td style="border:2px solid grey;">{{ c.total_failed }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+<div class="module" style="padding:30px; margin-bottom:40px;">
+    <h2>Campaign Open Rate Performance</h2>
+    <canvas id="campaignChart"></canvas>
+</div>
+
+<div class="module" style="padding:30px; margin-bottom:40px;">
+    <h2>Subscriber Growth (Last 7 Days)</h2>
+    <canvas id="growthChart"></canvas>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        alert("Copied!");
+    });
+}
+</script>
+
+<script>
+document.getElementById("html_input").addEventListener("keyup", function(){
+    document.getElementById("preview_box").innerHTML = this.value;
+});
+
+document.getElementById("send_to_all").addEventListener("change", function(){
+    document.getElementById("subscriber_box").style.display = this.checked ? "none" : "block";
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const campaignCtx = document.getElementById('campaignChart');
+
+new Chart(campaignCtx, {
+    type: 'bar',
+    data: {
+        labels: {{ campaign_labels|safe }},
+        datasets: [{
+            label: 'Open Rate %',
+            data: {{ campaign_open_data|safe }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: true }
+        }
+    }
+});
+
+const growthCtx = document.getElementById('growthChart');
+
+new Chart(growthCtx, {
+    type: 'line',
+    data: {
+        labels: ['Last 7 Days'],
+        datasets: [{
+            label: 'New Subscribers',
+            data: [{{ growth }}],
+            fill: false,
+            tension: 0.1
+        }]
+    }
+});
+
+</script>
+{% endblock %}

@@ -1,0 +1,200 @@
+/* =====================================================
+   DJANGO SPECTRA - CUSTOM ADMIN BRANDING
+   Project: Meek Technology
+   Author: Micheal Shokunbi
+===================================================== */
+
+.vertical-menu,
+.sidebar,
+.app-sidebar {
+    width: 260px !important;
+}
+
+.logo-box {
+    height: auto !important;
+    padding: 13px 12px !important;
+}
+
+.logo-box .logo-lg {
+    display: inline-block !important;
+    height: 48px !important;
+    width: auto !important;
+}
+
+.logo-box .logo-sm {
+    height: 42px;
+    width: auto;
+}
+
+.logo-box a::after {
+    content: "MEEKTECH ADMIN\A Control Portal";
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.15;
+    white-space: pre;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    margin-left: 4px;
+}
+
+/* FIX FOR LOGO TEXT */
+
+/* DARK MODE */
+[data-bs-theme="dark"] .logo-box a::after {
+    color: #e5e7eb;
+}
+
+/* LIGHT MODE */
+[data-bs-theme="light"] .logo-box a::after {
+    /* color: #111827; */
+    color: #0d0697;
+}
+
+
+/* ============================= */
+/* SIDEBAR MENU TEXT & ICONS */
+/* ============================= */
+
+/* DARK MODE */
+[data-bs-theme="dark"] .logo-box .logo-dark {
+    display: block !important;
+}
+
+[data-bs-theme="dark"] .logo-box .logo-light {
+    display: none !important;
+}
+
+/* LIGHT MODE */
+[data-bs-theme="light"] .main-nav {
+    background-color: #b2cbf5 !important;
+    /* background-color: #ffffff !important; light sidebar */
+}
+    
+[data-bs-theme="light"] .main-nav .menu-title,
+[data-bs-theme="light"] .main-nav .sub-nav-link,
+[data-bs-theme="light"] .main-nav .nav-text {
+    color: #1f2937 !important; /* dark text */
+}
+
+[data-bs-theme="light"] .main-nav i {
+    color: #4f46e5 !important; /* icon color */
+}
+
+[data-bs-theme="light"] .logo-box .logo-dark {
+    display: none !important;
+}
+
+[data-bs-theme="light"] .logo-box .logo-light {
+    display: block !important;
+}
+
+
+/* ============================= */
+/* PAGE BACKGROUND & EDGE FIX */
+/* ============================= */
+
+html[data-menu-color=dark] {
+    --bs-main-nav-bg: #b2cbf5;
+    --bs-main-nav-item-color: #a8b2b5;
+    --bs-main-nav-item-hover-bg: hsla(0, 0%, 100%, .06);
+    --bs-main-nav-item-hover-color: #fff;
+    --bs-main-nav-item-active-color: #eef2f7;
+    --bs-main-nav-border-color: #2f3944;
+}
+
+/* ============================= */
+/* SIDEBAR MENU INTERACTIONS */
+/* ============================= */
+
+/* DARK MODE */
+[data-bs-theme="dark"] .main-nav .nav-link:hover,
+[data-bs-theme="dark"] .main-nav .nav-link:focus {
+    background-color: #1e293b !important;
+    /* color: #0a33ee !important; */
+}
+
+[data-bs-theme="dark"] .main-nav .nav-link.active,
+[data-bs-theme="dark"] .main-nav .mm-active > .nav-link {
+    background-color: #334155 !important;
+    /* color: #f11313 !important; */
+}
+
+[data-bs-theme="dark"] .main-nav .sub-nav-link:hover,
+[data-bs-theme="dark"] .main-nav .sub-nav-link:focus {
+    background-color: #1e293b !important;
+    /* color: #13e235 !important; */
+}
+
+[data-bs-theme="dark"] .main-nav .sub-nav-link.active,
+[data-bs-theme="dark"] .main-nav .mm-active > .sub-nav-link {
+    background-color: #334155 !important;
+    /* color: #18c8fdmh !important; */
+}
+
+/* LIGHT MODE */
+[data-bs-theme="light"] .main-nav .nav-link:hover,
+[data-bs-theme="light"] .main-nav .nav-text:hover,
+[data-bs-theme="light"] .main-nav .nav-link:focus {
+    background-color: #ffffff !important;
+    color: #4f46e5 !important;
+}
+
+[data-bs-theme="light"] .main-nav .nav-link.active,
+[data-bs-theme="light"] .main-nav .mm-active > .nav-link {
+    background-color: #ffffff !important;
+    color: #4f46e5 !important;
+}
+
+[data-bs-theme="light"] .main-nav .sub-nav-link:hover,
+[data-bs-theme="light"] .main-nav .sub-nav-link:focus {
+    background-color: #eef2ff !important;
+    color: #4f46e5 !important;
+}
+
+[data-bs-theme="light"] .main-nav .sub-nav-link.active,
+[data-bs-theme="light"] .main-nav .mm-active > .sub-nav-link {
+    background-color: #ffffff !important;
+    color: #4f46e5 !important;
+}
+
+/* Dashboard stat cards: ensure long names/roles stay on one line with ellipsis */
+.row.mb-4 .card .card-body h3.text-dark.fw-bold.mb-0,
+.spectra-dashboard .dashboard-header .dashboard-subtitle strong,
+.welcome-name,
+.welcome-role,
+.welcome-widget .welcome-name,
+.welcome-widget .welcome-role,
+.row.mb-4 .card .card-body h3.text-dark.fw-bold.mb-0 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 12rem;
+    vertical-align: middle;
+    font-size: 1.75rem;
+    line-height: 1.1;
+}
+
+@media (max-width: 768px) {
+    /* Keep stat-number size on mobile equal to desktop */
+    .row.mb-4 .card .card-body h3.text-dark.fw-bold.mb-0 {
+        font-size: 1.75rem;
+        max-width: none;
+    }
+
+    /* Allow names/roles to wrap on small screens */
+    .spectra-dashboard .dashboard-header .dashboard-subtitle strong,
+    .welcome-name,
+    .welcome-role,
+    .welcome-widget .welcome-name,
+    .welcome-widget .welcome-role {
+        max-width: none;
+        font-size: 1.25rem;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        display: inline;
+    }
+}

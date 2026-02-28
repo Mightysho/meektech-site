@@ -1,0 +1,275 @@
+{% load static %}
+
+<footer class="relative text-white pt-12 pb-8 mt-10 bg-gradient-to-br from-[#0b1f3a]/90 via-[#081426]/70 to-black/90 backdrop-blur-xl border-t border-white/10">
+
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- TOP -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_1fr] gap-12 border-b border-slate-700 pb-8 reveal">
+
+      <!-- Logo + Address -->
+      <div class="space-y-5 max-w-sm">
+        <div class="flex items-center space-x-3">
+          <img src="{% static 'images/logo2.png' %}" class="h-11">
+          <span class="text-xl font-semibold">Meek Technology</span>
+        </div>
+
+        <p class="text-slate-300 text-sm italic">
+          ...Building modern software solutions for startups and enterprises.
+        </p>
+
+        <div class="text-sm text-slate-300 space-y-3">
+
+          <div class="flex items-center gap-3">
+            <img src="{% static 'images/location.png' %}" class="h-6 w-6 opacity-90 transition">
+            <p>Victoria Island, Lagos, Nigeria</p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <img src="{% static 'images/phone.png' %}" class="h-6 w-6 opacity-90 transition">
+            <p>+234 902 957 5266</p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <img src="{% static 'images/email.png' %}" class="h-6 w-6 opacity-90 transition">
+            <p>info@meektechnology.com</p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- LINKS -->
+      <!-- <div class="grid grid-cols-2 md:grid-cols-3 gap-x-16 gap-y-10 text-sm flex-1"> -->
+      <div class="grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr] md:grid-cols-3 gap-x-10 gap-y-10 text-sm flex-1">
+
+        <div>
+          <p class="footer-title">Quick Links</p>
+          <ul class="footer-links wide">
+            <li><a href="#">Why Choose Us</a></li>
+            <li><a href="#">Website Development</a></li>
+            <li><a href="#">Mobile App Development</a></li>
+            <li><a href="#">BVN/NIN Verification</a></li>
+            <li><a href="#">Maintenance & Support</a></li>
+            <li><a href="#">Tech Tutorials</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-title">Help</p>
+          <ul class="footer-links wide">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Our Terms</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookies</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-title">Contact</p>
+          <ul class="footer-links wide">
+            <li><a href="#">Sales Team</a></li>
+            <li><a href="#">24/7 Support</a></li>
+            <li><a href="#">Human Resources</a></li>
+            <li><a href="#">Live Chat</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <!-- NEWSLETTER -->
+      <div class="max-w-sm space-y-4" id="newsletterSection">
+
+        <p class="text-lg font-semibold">Join our newsletter</p>
+        <p class="text-slate-300 text-sm">
+          Get tech updates, product launches and engineering insights.
+        </p>
+
+        <!-- SUCCESS MESSAGE (INSIDE FOOTER, NOT TOP OF PAGE) -->
+        {% if messages %}
+          <div id="newsletterMsg" class="mt-4 space-y-2">
+            {% for message in messages %}
+              <div class="bg-green-600 text-white px-5 py-4 rounded-lg shadow-lg flex items-center gap-3 relative overflow-hidden">
+
+                <!-- success icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 13l4 4L19 7" />
+                </svg>
+
+                <span>{{ message }}</span>
+
+                <!-- 5s loading line -->
+                <div class="absolute bottom-0 left-0 h-1 bg-white animate-progress"></div>
+
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+
+        <!-- FORM -->
+        <form method="POST"
+              action="{% url 'subscribe_newsletter' %}"
+              id="newsletterForm"
+              class="flex bg-white/90 backdrop-blur rounded-lg overflow-hidden shadow-lg">
+          {% csrf_token %}
+          <input type="email" name="email" required placeholder="Enter email"
+                class="flex-1 px-4 py-3 text-black outline-none">
+
+          <button id="subscribeBtn"
+                  class="bg-blue-600 hover:bg-blue-700 px-5 text-white text-sm">
+            Subscribe
+          </button>
+        </form>
+
+        <!-- SOCIALS BELOW NEWSLETTER -->
+        <div class="flex justify-center items-center space-x-5 pt-5">
+          <a href="#"><img src="{% static 'images/icon-facebook.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="#"><img src="{% static 'images/icon-twitter.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="#"><img src="{% static 'images/icon-instagram.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="#"><img src="{% static 'images/icon-youtube.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- COPYRIGHT CENTER -->
+    <div class="text-center text-base text-slate-400 mt-8">
+      © {% now "Y" %} Meek Technology. All rights reserved.
+    </div>
+
+  </div>
+
+
+</footer>
+
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTopBtn"
+    class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg hidden">
+    ↑
+  </button>
+
+
+</footer>
+
+<style>
+
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* underline hover */
+.footer-links a {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+  transition: .3s;
+}
+
+.footer-links a::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0%;
+  height:2px;
+  background:#38bdf8;
+  transition:.3s;
+}
+
+.footer-links a:hover {
+  color:#38bdf8;
+}
+
+.footer-links a:hover::after {
+  width:100%;
+}
+
+.footer-title {
+  font-weight:600;
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#cbd5f5;
+}
+
+/* more width spacing */
+.footer-links.wide li {
+  margin-bottom:10px;
+}
+
+</style>
+
+<!-- Newsletter Script -->
+
+<script>
+
+/* scroll to top */
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+window.addEventListener("scroll", () => {
+  if(window.scrollY > 400){
+    scrollBtn.classList.remove("hidden");
+  } else {
+    scrollBtn.classList.add("hidden");
+  }
+});
+
+scrollBtn.addEventListener("click", () => {
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+
+/* auto dark/light based on system */
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.classList.add('dark');
+}
+
+/* scroll reveal */
+function reveal(){
+  document.querySelectorAll('.reveal').forEach(el=>{
+    let windowHeight = window.innerHeight;
+    let elementTop = el.getBoundingClientRect().top;
+    if(elementTop < windowHeight - 100){
+      el.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', reveal);
+reveal();
+
+</script>
+
+<style>
+@keyframes progressBar {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.animate-progress {
+  animation: progressBar 5s linear forwards;
+}
+</style>
+
+<script>
+setTimeout(() => {
+  const msg = document.getElementById("newsletterMsg");
+  if(msg){
+    msg.style.opacity = "0";
+    setTimeout(()=> msg.remove(), 500);
+  }
+}, 5000);
+</script>

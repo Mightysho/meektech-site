@@ -1,0 +1,390 @@
+{% load static %}
+<header class="py-10">
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white dark:bg-slate-900 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl border-b border-[grey]/30">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="space-x-4 flex items-center">
+        <img src="{% static 'images/logo.png' %}" alt="Logo" class="h-10">
+        <span class="text-xl font-bold text-gray-900 dark:text-white">Meek Technology</span>
+      </div>
+      <!-- Mobile menu button -->
+      <button id="mobileMenuButton" class="md:hidden text-3xl text-black dark:text-white transition-all duration-300">
+        ☰
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="space-x-5 hidden md:flex font-semibold items-center">
+        
+        <!-- Home -->
+        <a href="/" class="hover:text-blue-600 relative">Home</a>
+
+        <!-- Services -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            Services
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-85 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Website Development</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Mobile App Development</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Custom Software Development</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Backend Development & API Integrations</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">UI/UX Design</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Cloud & DevOps</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Maintenance & Support</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">BVN/NIN Verification</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            About
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-60 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Company Story</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Our Mission</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Our Vision</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Our Team</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Why Choose Us</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Certifications / Experience</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Solutions -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            Solutions
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-60 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">FinTech Solutions</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">HealthTech Systems</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">E-commerce Platforms</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Enterprise Automation</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Startup MVP Development</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            Projects
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-38 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Case Studies</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Before vs After</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Live Demos</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Screenshots</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Our Products</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Blog -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            Blog
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-49 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Tech Tutorials</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Industry Trends</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Development Guides</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Company Updates</a></li>
+              <li><a href="#newsletterSection" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Newsletter Signup</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Careers -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            Careers
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-45 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Hiring Developers</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Hiring Designers</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Non-Tech Hiring</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Internship / Siwes</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Our Culture</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Portal -->
+        <div class="group relative">
+          <a href="#" class="hover:text-blue-600 inline-flex items-center">
+            Portal
+            <svg class="ml-1 w-4 h-4 transform group-hover:rotate-180 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="absolute left-0 mt-2 w-40 bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50 bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+            <ul class="py-2">
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Client Portal</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Staff Portal</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Intern Portal</a></li>
+              <li><a href="#" class="block px-4 py-2 hover:bg-[#b2cbf5] dark:hover:bg-slate-700">Access Webmail</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <a href="{% url 'contact' %}" class="hover:text-blue-600 relative">Contact</a>
+      </div>      
+    </div>
+  </nav>
+
+  <!-- Overlay -->
+  <div id="mobileOverlay" class="fixed inset-0 bg-black/40 hidden z-40"></div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu"
+      class="fixed top-0 -left-full w-[85%] max-w-sm h-full bg-[white] text-black z-50
+              transition-all duration-500 ease-in-out flex flex-col shadow-2xl font-semibold
+              bg-gradient-to-br from-[#b2cbf5]/80 via-white/80 to-[violet]/80 backdrop-blur-xl">
+
+    <!-- Header inside mobile -->
+    <div class="flex items-center justify-between px-6 py-4.5 border-b border-[grey]/5border-[grey]/40">
+      <div class="flex items-center space-x-2">
+        <img src="{% static 'images/logo.png' %}" class="h-9">
+        <span class="font-semibold text-[1.25rem]">Meek Technology</span>
+      </div>
+
+      <button id="closeMobileMenu" class="text-black text-xl">✕</button>
+    </div>
+
+    <!-- Scrollable menu content -->
+    <div class="overflow-y-auto flex-1">
+
+      <!-- Menu Item -->
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">
+          <a href="/">Home</a>
+        </button>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">Services</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">Web Application Development</a>
+          <a href="#">Mobile App Development</a>
+          <a href="#">Custom Software Development</a>
+          <a href="#">Backend Development & API Integrations</a>
+          <a href="#">UI/UX Design</a>
+          <a href="#">Cloud & DevOps</a>
+          <a href="#">Maintenance & Support</a>
+          <a href="#">BVN/NIN Verification</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">About</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">Company Story</a>
+          <a href="#">Our Mission</a>
+          <a href="#">Our Vision</a>
+          <a href="#">Our Team</a>
+          <a href="#">Why Choose Us</a>
+          <a href="#">Certifications / Experience</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">Solutions</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">FinTech Solutions</a>
+          <a href="#">HealthTech Systems</a>
+          <a href="#">E-commerce Platforms</a>
+          <a href="#">Enterprise Automation</a>
+          <a href="#">Startup MVP Development</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">Projects</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">Case Studies</a>
+          <a href="#">Before vs After</a>
+          <a href="#">Live Demos</a>
+          <a href="#">Screenshots</a>
+          <a href="#">Our Products</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">Blog</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">Tech Tutorials</a>
+          <a href="#">Industry Trends</a>
+          <a href="#">Development Guides</a>
+          <a href="#">Company Updates</a>
+          <a href="#newsletterSection">Newsletter Signup</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">Careers</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">Web Application Development</a>
+          <a href="#">Mobile App Development</a>
+          <a href="#">Custom Software</a>
+          <a href="#">Mobile App Development</a>
+          <a href="#">Custom Software</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">Portal</button>
+        <div class="mobile-dropdown-menu hidden">
+          <a href="#">Client Portal</a>
+          <a href="#">Staff Portal</a>
+          <a href="#">Intern Portal</a>
+          <a href="#">Access Webmail</a>
+        </div>
+      </div>
+
+      <div class="mobile-dropdown">
+        <button class="mobile-link">
+          <a href="{% url 'contact' %}">Contact</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu Styling -->
+<style>
+
+/* main mobile menu buttons */
+.mobile-link {
+  width: 100%;
+  margin: 6px auto;
+  padding: 14px 18px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all .25s ease;
+}
+
+/* hover + click bg */
+.mobile-link:hover,
+.mobile-link.active {
+  background: #b2cbf5;
+  color: #000000;
+  border: 1.6px solid transparent;
+}
+
+/* dropdown items */
+.mobile-dropdown-menu a {
+  display: block;
+  width: calc(100% - 34px);
+  margin: 4px auto;
+  padding: 12px 16px;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all .25s ease;
+}
+
+.mobile-dropdown-menu a:hover,
+.mobile-dropdown-menu a:active {
+  background: #f3aee4c4;
+  color: #000000;
+  border: 1px solid transparent;
+}
+
+</style>
+
+
+<!-- Mobile Menu JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const mobileMenu = document.getElementById('mobileMenu');
+  const openBtn = document.getElementById('mobileMenuButton');
+  const closeBtn = document.getElementById('closeMobileMenu');
+  const overlay = document.getElementById('mobileOverlay');
+
+  /* OPEN MENU */
+  function openMenu(){
+    mobileMenu.classList.remove('-left-full');
+    mobileMenu.classList.add('left-0');
+    overlay.classList.remove('hidden');
+
+    openBtn.style.pointerEvents = "none";
+    openBtn.style.opacity = "0";
+  }
+
+  /* CLOSE MENU */
+  function closeMenu(){
+    mobileMenu.classList.remove('left-0');
+    mobileMenu.classList.add('-left-full');
+    overlay.classList.add('hidden');
+
+    openBtn.style.pointerEvents = "auto";
+    openBtn.style.opacity = "1";
+  }
+
+  openBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+
+  /* MOBILE DROPDOWN BEHAVIOUR */
+  document.querySelectorAll('.mobile-dropdown').forEach(drop => {
+
+    const btn = drop.querySelector('.mobile-link');
+    const menu = drop.querySelector('.mobile-dropdown-menu');
+
+    btn?.addEventListener('click', function(){
+
+      /* CLOSE OTHER DROPDOWNS */
+      document.querySelectorAll('.mobile-dropdown-menu').forEach(m => {
+        if(m !== menu){
+          m.classList.add('hidden');
+        }
+      });
+
+      document.querySelectorAll('.mobile-link').forEach(b => {
+        if(b !== btn) b.classList.remove('active');
+      });
+
+      /* TOGGLE CURRENT */
+      menu.classList.toggle('hidden');
+      btn.classList.toggle('active');
+
+    });
+
+  });
+
+});
+</script>

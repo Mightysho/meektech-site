@@ -1,0 +1,122 @@
+<!-- Coming Soon Message Section -->
+<div class="min-h-screen flex items-center justify-center dark:bg-slate-900 px-6">
+
+  <div class="text-center space-y-6 w-full">
+    <!-- Heading -->
+    <h1 id="typingText"
+      class="text-3xl sm:text-4xl md:text-6xl lg:text-6xl font-bold leading-tight whitespace-normal md:whitespace-nowrap break-words max-w-full mx-auto text-center">
+    </h1>  
+
+    <!-- Message -->
+    <p class="fade-up text-black-600 dark:text-black-300 text-lg leading-relaxed max-w-xl mx-auto">
+      We're currently building something amazing for you.  
+      Our website is under development and will be available soon.
+    </p>
+
+    <!-- Contact -->
+    <p class="fade-up delay-1 text-black-700 dark:text-black-300 max-w-xl mx-auto">
+      For enquiries or early communication, kindly reach us at:
+      <br>
+      <a href="mailto:meektechnology@hotmail.com"
+         class="text-black-600 dark:text-blue-400 font-medium hover:underline">
+         meektechnology@hotmail.com
+      </a>
+    </p>
+
+    <!-- Admin Notice -->
+    <div class="fade-up delay-2 bg-grey-50 dark:bg-slate-800 border border-grey-700 dark:border-slate-700 p-4 rounded-xl max-w-xl mx-auto">
+      <p class="text-sm text-black-700 dark:text-gray-300">
+        Authorized reviewers can access the admin dashboard for preview and testing.
+      </p>
+
+      <a href="/admin/"
+        class="inline-block mt-3 px-4 py-2 text-sm font-medium text-white-600 border border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition">
+          Go to Admin Panel
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Animations -->
+<style>
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .delay-1 { animation-delay: .4s; }
+  .delay-2 { animation-delay: .8s; }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #typingText::after {
+    content: "|";
+    animation: blink 1s infinite;
+    margin-left: 4px;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  /* Make typingText resilient on small screens */
+  #typingText {
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  @media (max-width: 480px) {
+    #typingText {
+      font-size: 1.5rem; /* smaller on very small screens */
+      line-height: 1.1;
+    }
+    #typingText::after { margin-left: 6px; }
+  }
+
+</style>
+
+
+<!-- Typing Effect -->
+<script>
+  const text = "Our Website Is Coming Soon 🚀";
+  const typingTarget = document.getElementById("typingText");
+
+  let index = 0;
+  let isDeleting = false;
+
+  function typeLoop() {
+
+    if (!typingTarget) return;
+
+    if (!isDeleting) {
+      typingTarget.innerHTML = text.substring(0, index++);
+    } else {
+      typingTarget.innerHTML = text.substring(0, index--);
+    }
+
+    let speed = isDeleting ? 35 : 60;
+
+    if (index === text.length + 1) {
+      isDeleting = true;
+      speed = 1200; // pause before deleting
+    }
+
+    if (index === 0) {
+      isDeleting = false;
+      speed = 500; // pause before typing again
+    }
+
+    setTimeout(typeLoop, speed);
+  }
+
+  document.addEventListener("DOMContentLoaded", typeLoop);
+</script>
