@@ -25,13 +25,11 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-d4utin+6d9ha3%q6vfbbe$bzjq9ezx30k$92vez*=lkc8-$98j'
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['meektechnology.pythonanywhere.com', '127.0.0.1']
 # Read ALLOWED_HOSTS from environment and convert to a list (comma-separated).
 # Default to common local hosts and strip any port components that may appear.
 ALLOWED_HOSTS_ENV = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost")
@@ -151,6 +149,16 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv("DB_NAME"),
+#         'USER': os.getenv("DB_USER"),
+#         'PASSWORD': os.getenv("DB_PASSWORD"),
+#         'HOST': os.getenv("DB_HOST"),
+#         'PORT': os.getenv("DB_PORT"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -308,8 +316,6 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() in ("1", "true", "yes
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
-
-# DEFAULT_FROM_EMAIL = "Meek Technology <meektechnology@hotmail.com>"
 DEFAULT_FROM_EMAIL = "Meek Technology <no-reply@meektechnology.com>"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
@@ -317,10 +323,6 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 # print("GOOGLE MAP KEY:", GOOGLE_MAPS_API_KEY)
-
-# print("EMAIL HOST USER:", EMAIL_HOST_USER)
-# print("EMAIL HOST PASSWORD:", EMAIL_HOST_PASSWORD)
-
 # print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 CKEDITOR_UPLOAD_PATH = 'ckeditor/'
@@ -334,149 +336,3 @@ CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 #     "data_folder_out": os.path.join(BASE_DIR, "celery", "out"),
 #     "data_folder_processed": os.path.join(BASE_DIR, "celery", "processed"),
 # }
-
-# from django.db.models import Count
-# from django.utils import timezone
-# from datetime import timedelta
-
-
-# def newsletter_dashboard(request):
-
-#     campaigns = NewsletterCampaign.objects.all().order_by("-created_at")
-#     subscribers = NewsletterSubscriber.objects.filter(is_active=True)
-
-#     total_campaigns = campaigns.count()
-#     total_subscribers = subscribers.count()
-#     total_sent = NewsletterRecipient.objects.filter(sent=True).count()
-#     total_opened = NewsletterRecipient.objects.filter(opened=True).count()
-#     total_failed = NewsletterRecipient.objects.filter(sent=False).count()
-
-#     open_rate = round((total_opened / total_sent) * 100, 2) if total_sent > 0 else 0
-#     failure_rate = round((total_failed / total_sent) * 100, 2) if total_sent > 0 else 0
-
-#     # Campaign performance data
-#     campaign_labels = []
-#     campaign_open_data = []
-
-#     for campaign in campaigns[:10]:
-#         campaign_labels.append(campaign.subject)
-#         campaign_open_data.append(campaign.open_rate)
-
-#     # Subscriber growth (last 7 days)
-#     last_7_days = timezone.now() - timedelta(days=7)
-#     growth = NewsletterSubscriber.objects.filter(
-#         created_at__gte=last_7_days
-#     ).count()
-
-#     context = {
-#         "campaigns": campaigns,
-#         "subscribers": subscribers,
-#         "total_campaigns": total_campaigns,
-#         "total_subscribers": total_subscribers,
-#         "total_sent": total_sent,
-#         "open_rate": open_rate,
-#         "failure_rate": failure_rate,
-#         "campaign_labels": campaign_labels,
-#         "campaign_open_data": campaign_open_data,
-#         "growth": growth,
-#     }
-
-#     return render(request, "admin/newsletter/newsletter_dashboard.html", context)
-
-
-
-# from django.core.mail import EmailMultiAlternatives
-# from django.conf import settings
-
-# def send_campaign_emails(campaign, subscribers):
-
-#     for subscriber in subscribers:
-
-#         recipient = NewsletterRecipient.objects.create(
-#             campaign=campaign,
-#             subscriber=subscriber,
-#             sent=False
-#         )
-
-#         try:
-#             # Build unsubscribe link
-#             unsubscribe_path = reverse(
-#                 "unsubscribe",
-#                 kwargs={"token": sub.unsubscribe_token}
-#             )
-
-#             unsubscribe_link = f"{settings.SITE_URL}{unsubscribe_path}"
-
-#             # Append unsubscribe to HTML BEFORE sending
-#             html_with_unsubscribe = f"""
-#                 {campaign.body_html}
-#                 <br><br>
-#                 <p style="font-size:12px; color:gray;">
-#                     If you no longer wish to receive these emails,
-#                     <a href="{unsubscribe_link}">Unsubscribe here</a>.
-#                 </p>
-#             """
-
-#             email = EmailMultiAlternatives(
-#                 subject=campaign.subject,
-#                 body="This email requires HTML support.",
-#                 from_email=settings.DEFAULT_FROM_EMAIL,
-#                 to=[subscriber.email],
-#                 reply_to=[campaign.reply_to] if campaign.reply_to else None,
-#             )
-
-#             email.attach_alternative(campaign.body_html, "text/html")
-#             email.send(fail_silently=False)
-
-#             recipient.sent = True
-#             recipient.sent_time = timezone.now()
-#             recipient.save()
-
-#         except Exception as e:
-#             recipient.sent = False
-#             recipient.error_message = str(e)
-#             recipient.save()
-    
-#     campaign.sent_time = timezone.now()
-#     campaign.save()
-
-# BACK-UP CODE HERE FOR send_campaign_emails
-# from django.shortcuts import render, redirect
-# from django.utils import timezone
-# from django.contrib import messages
-# from django.conf import settings
-# from django.core.mail import EmailMultiAlternatives
-# from .models import NewsletterSubscriber, NewsletterCampaign, NewsletterRecipient
-
-
-# def send_campaign_emails(campaign, subscribers):
-
-#     for sub in subscribers:
-
-#         recipient = NewsletterRecipient.objects.create(
-#             campaign=campaign,
-#             subscriber=sub
-#         )
-
-#         try:
-#             msg = EmailMultiAlternatives(
-#                 subject=campaign.subject,
-#                 body="Newsletter from Meek Technology",
-#                 from_email=settings.DEFAULT_FROM_EMAIL,
-#                 to=[sub.email],
-#                 reply_to=[campaign.reply_to] if campaign.reply_to else None
-#             )
-
-#             msg.attach_alternative(campaign.body_html, "text/html")
-#             msg.send()
-
-#             recipient.sent = True
-#             recipient.sent_time = timezone.now()
-#             recipient.save()
-
-#         except Exception as e:
-#             recipient.error_message = str(e)
-#             recipient.save()
-
-#     campaign.sent_time = timezone.now()
-#     campaign.save()
