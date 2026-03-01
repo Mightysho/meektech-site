@@ -77,38 +77,3 @@ class NewsletterImageAdmin(admin.ModelAdmin):
         return ""
 
     image_url.short_description = "URL (click Copy)"
-
-    def add_view(self, request, form_url='', extra_context=None):
-        """Override the default add view to allow multiple image uploads (max 4)."""
-        from django.template.response import TemplateResponse
-        from django.shortcuts import redirect
-        from django.contrib import messages
-        from django.urls import reverse
-
-        if not self.has_add_permission(request):
-            from django.core.exceptions import PermissionDenied
-            raise PermissionDenied
-
-        if request.method == 'POST':
-            files = request.FILES.getlist('images') or []
-            if not files:
-                messages.error(request, 'No files uploaded.')
-                return redirect(reverse('admin:newsletter_newsletterimage_changelist'))
-
-            max_files = 5
-            created = 0
-            for f in files[:max_files]:
-                NewsletterImage.objects.create(image=f)
-                created += 1
-
-            if len(files) > max_files:
-                messages.warning(request, f'Only the first {max_files} files were uploaded.')
-            messages.success(request, f'Successfully uploaded {created} image(s).')
-            return redirect(reverse('admin:newsletter_newsletterimage_changelist'))
-
-        # GET — render a simple multiple-file upload form
-        context = dict(
-            self.admin_site.each_context(request),
-            opts=self.model._meta,
-        )
-        return TemplateResponse(request, 'admin/newsletter/newsletterimage/add_multi.html', context)
