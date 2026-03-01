@@ -1,0 +1,110 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Add newsletter image | Admin{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Add newsletter image</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <form enctype="multipart/form-data" method="post" id="newsletterimage_form" novalidate>
+                    {% csrf_token %}
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">Add newsletter image</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <fieldset class="module aligned">
+                                <div class="row">
+                                    <div class="form-row col-12 field-image">
+                                        <div class="fieldBox">
+                                            <label class="form-label">Images (up to 5 single files)</label>
+                                            <div>
+                                                <input type="file" name="image" accept="image/*" id="id_image_1" />
+                                            </div>
+                                            <div>
+                                                <input type="file" name="image" accept="image/*" id="id_image_2" />
+                                            </div>
+                                            <div>
+                                                <input type="file" name="image" accept="image/*" id="id_image_3" />
+                                            </div>
+                                            <div>
+                                                <input type="file" name="image" accept="image/*" id="id_image_4" />
+                                            </div>
+                                            <div>
+                                                <input type="file" name="image" accept="image/*" id="id_image_5" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row col-12 field-image_preview">
+                                        <div class="fieldBox readonly">
+                                            <label class="form-label">Preview</label>
+                                            <div class="readonly" id="preview_container"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row col-12 field-image_url">
+                                        <div class="fieldBox readonly">
+                                            <label class="form-label">Image URLs (will appear after save)</label>
+                                            <div class="readonly"><p></p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="card-footer border-top">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div></div>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'admin:newsletter_newsletterimage_changelist' %}" class="btn btn-light">Cancel</a>
+                                    <button type="submit" name="_save" value="1" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Simple preview for the five file inputs
+function previewFiles() {
+    const container = document.getElementById('preview_container');
+    container.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        const inp = document.getElementById('id_image_' + i);
+        if (!inp) continue;
+        const file = inp.files && inp.files[0];
+        if (file) {
+            const img = document.createElement('img');
+            img.style.maxWidth = '200px';
+            img.style.marginRight = '8px';
+            img.style.marginBottom = '8px';
+            img.src = URL.createObjectURL(file);
+            container.appendChild(img);
+        }
+    }
+}
+
+for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById('id_image_' + i);
+    if (el) el.addEventListener('change', previewFiles);
+}
+</script>
+
+{% endblock %}
