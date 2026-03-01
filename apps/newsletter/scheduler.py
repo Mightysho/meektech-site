@@ -129,12 +129,7 @@ def start():
         scheduler.start()
         logger.info("Newsletter scheduler started with DjangoJobStore")
 
-        # Add a recurring safety job that checks for scheduled campaigns and sends them.
-        # Use the module-level `send_scheduled_campaigns` function so APScheduler can serialize it.
-        try:
-            scheduler.add_job(send_scheduled_campaigns, 'interval', minutes=1, id='newsletter_scheduled_campaigns', replace_existing=True)
-            logger.info('Added recurring safety job newsletter_scheduled_campaigns')
-        except Exception:
-            logger.exception('Failed to add recurring safety job')
+        # No recurring safety job: only per-campaign jobs are scheduled and persisted.
+        # This keeps django_apscheduler/DjangoJob focused on the explicit campaign jobs.
     except Exception as e:
         logger.exception("Failed to start newsletter scheduler: %s", e)
