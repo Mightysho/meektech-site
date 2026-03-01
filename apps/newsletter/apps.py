@@ -28,6 +28,22 @@ class NewsletterConfig(AppConfig):
             return
 
         try:
+            # Unregister django_apscheduler models from admin if present
+            try:
+                from django.contrib import admin
+                from django_apscheduler import models as _aps_models
+
+                for _m in (getattr(_aps_models, "DjangoJob", None), getattr(_aps_models, "DjangoJobExecution", None)):
+                    if _m is not None:
+                        try:
+                            admin.site.unregister(_m)
+                        except Exception:
+                            # ignore if not registered
+                            pass
+            except Exception:
+                # ignore if django_apscheduler isn't installed or admin not ready
+                pass
+
             from .scheduler import start
             start()
         except Exception:

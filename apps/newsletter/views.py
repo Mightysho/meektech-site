@@ -231,15 +231,6 @@ def newsletter_dashboard(request):
         # Send immediately if no schedule
         if not scheduled_time:
             send_campaign_emails(campaign, subscribers)
-        else:
-            # schedule a one-off job to run at the scheduled_time
-            try:
-                from . import scheduler as newsletter_scheduler
-                newsletter_scheduler.schedule_campaign_job(campaign.pk, scheduled_time)
-            except Exception:
-                # log but don't break the request
-                import logging
-                logging.getLogger(__name__).exception("Failed to schedule campaign job in scheduler module")
 
         messages.success(request, "Campaign created successfully.")
         return redirect("newsletter_dashboard")
