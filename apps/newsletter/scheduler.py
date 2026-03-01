@@ -67,11 +67,11 @@ def start():
     try:
         # Lazy import to avoid hard dependency during tests
         from django_apscheduler.jobstores import DjangoJobStore
-        from django_apscheduler import register_events
 
         # add DjangoJobStore so jobs appear in Django models
         scheduler.add_jobstore(DjangoJobStore(), "default")
-        register_events(scheduler)
+
+        # Start scheduler; DjangoJobStore will register listeners when started
         scheduler.start()
         logger.info("Newsletter scheduler started with DjangoJobStore")
     except Exception as e:
