@@ -99,6 +99,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
+SITE_URL = "https://127.0.0.1:8000/"
 
 TAILWIND_APP_NAME = 'theme'
 
