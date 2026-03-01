@@ -50,7 +50,6 @@ class NewsletterImageAdmin(admin.ModelAdmin):
     list_display = ("image_preview", "image_url", "uploaded_at")
     readonly_fields = ("image_preview", "image_url",)
     search_fields = ("image",)
-    add_form_template = "admin/newsletter/newsletterimage/add_form.html"
 
     def image_preview(self, obj):
         if obj.image:
@@ -78,24 +77,3 @@ class NewsletterImageAdmin(admin.ModelAdmin):
         return ""
 
     image_url.short_description = "URL (click Copy)"
-
-    def add_view(self, request, form_url='', extra_context=None):
-        """Allow multiple single-file inputs named 'image' to create multiple NewsletterImage objects."""
-        from django.http import HttpResponseRedirect
-        from django.urls import reverse
-
-        if request.method == 'POST' and request.FILES:
-            files = request.FILES.getlist('image')
-            created = 0
-            for f in files:
-                if f:
-                    NewsletterImage.objects.create(image=f)
-                    created += 1
-
-            # Redirect to changelist after successful upload
-            try:
-                return HttpResponseRedirect(reverse('admin:newsletter_newsletterimage_changelist'))
-            except Exception:
-                return HttpResponseRedirect(request.path)
-
-        return super().add_view(request, form_url, extra_context=extra_context)
