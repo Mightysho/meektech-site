@@ -20,6 +20,9 @@ class RecipientAdmin(admin.ModelAdmin):
     list_filter = ("sent", "opened", "campaign", "subscriber",)
     search_fields = ("subscriber__email", "campaign__subject",)
     autocomplete_fields = ["subscriber", "campaign"]
+    def has_add_permission(self, request):
+        # Prevent adding recipients from the admin to keep recipients tied to campaigns
+        return False
 
 
 @admin.register(NewsletterCampaign)
