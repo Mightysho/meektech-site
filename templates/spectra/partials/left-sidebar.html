@@ -181,6 +181,24 @@
                 </li>
                 {% endif %}
 
+                {% if SPECTRA_CONFIG.show_recent_actions %}
+                <li class="nav-item nav-item-recent-actions">
+                    <a href="javascript:void(0);" class="nav-link" data-toggle="recent-actions" aria-expanded="false">
+                        <span class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h3l3 8 4-16 3 8h4"/></svg>
+                        </span>
+                        <span class="nav-text">{% trans "Recent Actions" %}</span>
+                        <span class="nav-arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </a>
+                    <ul class="nav-submenu recent-actions-dropdown" id="recent-actions-dropdown" aria-hidden="true">
+                        {% load recent_actions_tags %}
+                        {% get_recent_admin_actions_sidebar %}
+                    </ul>
+                </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a href="{% url 'admin:logout' %}" class="nav-link">
                         <span class="nav-icon">

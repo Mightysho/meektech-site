@@ -283,6 +283,7 @@ SPECTRA_CONFIG = {
     "custom_js": [
         "js/custom-admin.js",
         "js/recent_actions_init.js",
+        "js/recent_actions_sidebar.js",
     ],
     
     # ===== Advanced =====

@@ -1,0 +1,21 @@
+{% load i18n %}
+<ul class="recent-actions-sidebar-list">
+    {% for a in recent_actions %}
+    <li class="recent-actions-sidebar-item action-{{ a.action_flag|lower }}">
+        {% if a.object_url %}
+            <a href="{{ a.object_url }}" class="ras-link">
+                <span class="ras-type">{{ a.action_flag }}</span>
+                <span class="ras-object">{{ a.object_repr|truncatechars:40 }}</span>
+            </a>
+        {% else %}
+            <div class="ras-static">
+                <span class="ras-type">{{ a.action_flag }}</span>
+                <span class="ras-object">{{ a.object_repr|truncatechars:40 }}</span>
+            </div>
+        {% endif %}
+        <time class="ras-time">{{ a.action_time|timesince }} ago</time>
+    </li>
+    {% empty %}
+    <li class="recent-actions-sidebar-empty">{% trans "No recent actions" %}</li>
+    {% endfor %}
+</ul>
