@@ -337,3 +337,4 @@ def track_open(request, recipient_id):
     width="1" height="1" />
     """
 
+
