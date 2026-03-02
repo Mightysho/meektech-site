@@ -1,0 +1,10 @@
+{% load i18n %}
+{# This template is used by Spectra widget loader. It tries to use provided `recent_actions` context
+   if available; otherwise it falls back to our inclusion tag which fetches LogEntry objects. #}
+
+{% if recent_actions %}
+    {% include "spectra/widgets/_recent_actions_list.html" %}
+{% else %}
+    {% load recent_actions_tags %}
+    {% get_recent_admin_actions %}
+{% endif %}

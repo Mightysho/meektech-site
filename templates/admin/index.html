@@ -1,0 +1,11 @@
+{% extends "admin/index.html" %}
+{% load recent_actions_tags %}
+
+{% block content %}
+    {{ block.super }}
+    {% if SPECTRA_CONFIG.show_recent_actions %}
+        <div class="spectra-recent-actions-container">
+            {% get_recent_admin_actions %}
+        </div>
+    {% endif %}
+{% endblock %}
