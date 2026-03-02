@@ -99,7 +99,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-SITE_URL = "https://127.0.0.1:8000/"
+SITE_URL = os.getenv("SITE_URL")
 
 TAILWIND_APP_NAME = 'theme'
 

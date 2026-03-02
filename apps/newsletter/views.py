@@ -80,6 +80,18 @@ def send_campaign_emails(campaign, subscribers):
                 </p>
             """
 
+            # Add a 1x1 tracking pixel that points to the track_open view for this recipient.
+            # Use SITE_URL when available so the pixel is absolute and reachable from email clients.
+            site = getattr(settings, "SITE_URL", "") or ""
+            site = site.rstrip('/')
+            if site:
+                track_url = f"{site}/track/{recipient.id}/"
+            else:
+                track_url = f"/track/{recipient.id}/"
+
+            tracking_pixel = f'<img src="{track_url}" width="1" height="1" style="display:none;"/>'
+            html_with_unsubscribe = html_with_unsubscribe + tracking_pixel
+
             email = EmailMultiAlternatives(
                 subject=campaign.subject,
                 body="This email requires HTML support.",
