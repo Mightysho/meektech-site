@@ -1,4 +1,4 @@
-# Meek Technology Site
+# Meek Technology Website
 
 This project aims to develop the official website of Meek Technology.
 
