@@ -27,6 +27,8 @@ from django.conf.urls.static import static
 # from portals.intern_portal.urls import path, include
 from apps.newsletter.views import subscribe_newsletter
 # from accounts.views import login_view
+from apps.help.views import Faq
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,6 +47,7 @@ urlpatterns = [
     path("client/", lambda r: login_view(r, "CLIENT"), name="client_login"),
     path("staff/", lambda r: login_view(r, "STAFF"), name="staff_login"),
     path("intern/", lambda r: login_view(r, "INTERN"), name="intern_login"),
+    path("faq/", Faq, name="faq"),
 ]
 
 
