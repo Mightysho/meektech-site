@@ -10,5 +10,4 @@ class FaqAdmin(admin.ModelAdmin):
         "Answer",
     )
     search_fields = ("Question", "Answer",)
-
-
+    
