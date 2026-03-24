@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Faq
+from .models import FaqFooter
 
 
-@admin.register(Faq)
+@admin.register(FaqFooter)
 class FaqAdmin(admin.ModelAdmin):
 
     list_display = (
@@ -10,4 +10,3 @@ class FaqAdmin(admin.ModelAdmin):
         "Answer",
     )
     search_fields = ("Question", "Answer",)
-    
