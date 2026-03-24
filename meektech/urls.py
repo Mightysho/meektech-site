@@ -27,7 +27,6 @@ from django.conf.urls.static import static
 # from portals.intern_portal.urls import path, include
 from apps.newsletter.views import subscribe_newsletter
 # from accounts.views import login_view
-from apps.help.views import Faq
 
 
 urlpatterns = [
@@ -42,14 +41,11 @@ urlpatterns = [
     # path("staff/", include("staff_portal.urls")),
     # path("intern/", include("intern_portal.urls")),
     path("subscribe-newsletter/", subscribe_newsletter, name="subscribe_newsletter"),
-    # path("newsletter/", include("apps.newsletter.urls")),
     path("", include("apps.newsletter.urls")),
+    path('', include('apps.help.urls')),
     path("client/", lambda r: login_view(r, "CLIENT"), name="client_login"),
     path("staff/", lambda r: login_view(r, "STAFF"), name="staff_login"),
     path("intern/", lambda r: login_view(r, "INTERN"), name="intern_login"),
-    path("faq/", Faq, name="faq"),
-    # path('', include('apps.help.urls')),
-
 ]
 
 
