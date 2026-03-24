@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     # "intern",
     # "portals.staff_portal",
     # "portals.intern_portal",
+    "apps.help",
     "apps.about",
     "apps.blog",
     "apps.careers",

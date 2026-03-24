@@ -48,6 +48,8 @@ urlpatterns = [
     path("staff/", lambda r: login_view(r, "STAFF"), name="staff_login"),
     path("intern/", lambda r: login_view(r, "INTERN"), name="intern_login"),
     path("faq/", Faq, name="faq"),
+    # path('', include('apps.help.urls')),
+
 ]
 
 
