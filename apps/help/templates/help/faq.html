@@ -3,53 +3,100 @@
 
 {% block title %}FAQ{% endblock %}
 
+{% block extra_head %}
+<style>
+  /* Scope everything to FAQ only */
+  .faq-wrapper .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-wrapper .faq-content.open {
+    max-height: 500px;
+  }
+
+  .faq-wrapper .rotate-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-wrapper .rotate-icon.open {
+    transform: rotate(180deg);
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="text-neutral-500 pt-16">
-    <div class="bg-gradient-to-t from-primary-500/10 from-20% to-transparent relative bg-surface-950 p-12 lg:p-20">
-        <div class="relative z-20 flex flex-col items-center gap-14 zoomin">
-            <div class="flex flex-col items-center gap-4">
-                <h1 class="text-3xl font-semibold text-neutral-500 leading-tight"> 
-                    Frequently Asked Questions 
-                </h1>
-                <p class="text-base text-neutral-500 leading-normal max-w-xl text-center"> 
-                    Your step-by-step guide to getting started with Meek Technology.
-                    Read through the frequently asked questions below to learn more. 
-                </p>
-            </div>
-            <div class="w-full max-w-[682px]">
-                {% for faq in frequently %}
-                    <div class="p-accordion p-component !rounded-xl !overflow-hidden border-none" data-pc-name="accordion" pc2="" data-pc-section="root">
-                        <div class="p-accordionpanel !border-b !border-white/10 last:!border-none" data-pc-name="accordionpanel" data-p-disabled="false" pc3="" data-pc-section="root" data-p-active="false">
-                            <button class="p-accordionheader !bg-primary-300 !p-6 !text-lg !font-medium !text-neutral-500 !leading-tight" 
-                            type="button" id="pv_id_1_accordionheader_0" tabindex="0" aria-controls="pv_id_1_accordioncontent_0" 
-                            data-pc-name="accordionheader" data-p-disabled="false" pc4="" data-pc-section="root" 
-                            aria-expanded="false" data-p-active="false">
-                                {{ Faq.Question }}
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" class="p-icon p-accordionheader-toggle-icon !text-neutral-500 !w-4 !h-4"
-                            aria-hidden="true" data-pc-section="toggleicon">
-                            <path d="M12.2097 10.4113C12.1057 10.4118 12.0027 10.3915 11.9067 10.3516C11.8107 10.3118 11.7237 10.2532 11.6506 10.1792L6.93602 5.46461L2.22139 
-                            10.1476C2.07272 10.244 1.89599 10.2877 1.71953 10.2717C1.54307 10.2556 1.3771 10.1808 1.24822 10.0593C1.11933 9.93766 1.035 9.77633 1.00874 
-                            9.6011C0.982477 9.42587 1.0158 9.2469 1.10338 9.09287L6.37701 3.81923C6.52533 3.6711 6.72639 3.58789 6.93602 3.58789C7.14565 3.58789 7.3467 
-                            3.6711 7.49502 3.81923L12.7687 9.09287C12.9168 9.24119 13 9.44225 13 9.65187C13 9.8615 12.9168 10.0626 12.7687 10.2109C12.616 10.3487 12.4151 
-                            10.4207 12.2097 10.4113Z" fill="currentColor"></path>
-                            </svg>
-                            </button>
-                            <div class="p-accordioncontent !bg-neutral-20" id="pv_id_1_accordioncontent_0" role="region" aria-labelledby="pv_id_1_accordionheader_0" data-pc-name="accordioncontent" pc6="" data-pc-section="root" data-p-active="false" style="display: none;">
-                                <div class="p-accordioncontent-content !p-6 !bg-black/10" data-pc-section="content">
-                                    <p class="text-base !text-neutral-500 leading-normal">
-                                        {{ Faq.Answer }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
+
+<div class="faq-wrapper">
+
+  <!-- HEADER -->
+  <div class="bg-gradient-to-t from-primary-500/10 to-transparent py-12 px-4 py-4">
+    <div class="text-center max-w-2xl mx-auto">
+      
+      <h1 class="text-3xl md:text-4xl font-semibold text-black mb-3">
+        Frequently Asked Questions
+      </h1>
+
+      <p class="text-gray-600 text-sm md:text-base">
+        Your step-by-step guide to getting started with Meek Technology.
+        Read through the frequently asked questions below.
+      </p>
+
     </div>
+  </div>
+
+  <!-- FAQ ITEMS -->
+  <div class="max-w-3xl mx-auto px-4 mt-6 space-y-3">
+
+    <!-- ITEM -->
+    <div class="border border-gray-200 rounded-xl overflow-hidden">
+      
+      <button class="faq-toggle w-full flex justify-between items-center px-5 py-4 text-left">
+        
+        <span class="font-medium text-black text-sm md:text-base bg-blue-50">
+          Can I Use an Account from Another Broker?
+        </span>
+
+        <svg class="rotate-icon w-4 h-4 text-gray-700"
+          viewBox="0 0 14 14" fill="none">
+          <path d="M1.5 5.5L7 10.5L12.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+
+      </button>
+
+      <div class="faq-content px-5 bg-[#0000001A]">
+        <p class="py-4 text-[#121212] text-sm md:text-base">
+          No. Our system only works with Vantage Markets accounts.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
+<script>
+  document.querySelectorAll(".faq-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      const content = toggle.nextElementSibling;
+      const icon = toggle.querySelector(".rotate-icon");
 
+      // Close others
+      document.querySelectorAll(".faq-content").forEach(item => {
+        if (item !== content) item.classList.remove("open");
+      });
+
+      document.querySelectorAll(".rotate-icon").forEach(i => {
+        if (i !== icon) i.classList.remove("open");
+      });
+
+      // Toggle current
+      content.classList.toggle("open");
+      icon.classList.toggle("open");
+    });
+  });
+</script>
 
 {% endblock %}
