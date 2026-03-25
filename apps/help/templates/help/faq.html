@@ -13,7 +13,7 @@
   }
 
   .faq-wrapper .faq-content.open {
-    max-height: 500px;
+    max-height: 1000px;
   }
 
   .faq-wrapper .rotate-icon {
@@ -49,35 +49,53 @@
   <!-- FAQ ITEMS -->
   <div class="max-w-3xl mx-auto px-4 mt-6 space-y-3">
 
-    <!-- ITEM -->
-    <div class="border border-gray-200 rounded-xl overflow-hidden py-3">
-      
-      <button class="faq-toggle w-full flex justify-between items-center px-5 py-4 text-left bg-[#b2cbf5]">
+    {% for faq in frequently %}
+
+        <!-- ITEM -->
+        <div class="border border-gray-200 rounded-xl overflow-hidden">
         
-        <span class="font-medium text-black text-medium md:text-base">
-          Can I Use an Account from Another Broker?
-        </span>
+            <button class="faq-toggle w-full flex justify-between items-center px-5 py-4 text-left bg-[#b2cbf5]">
+                
+                <span class="font-medium text-black text-medium md:text-base">
+                {{ faq.Question }}
+                </span>
 
-        <svg class="rotate-icon w-4 h-4 text-gray-700"
-          viewBox="0 0 14 14" fill="none">
-          <path d="M1.5 5.5L7 10.5L12.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+                <svg class="rotate-icon w-4 h-4 text-gray-700"
+                viewBox="0 0 14 14" fill="none">
+                <path d="M1.5 5.5L7 10.5L12.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
 
-      </button>
+            </button>
 
-      <div class="faq-content px-5 bg-[#0000001A]">
-        <p class="py-4 text-[#121212] text-medium md:text-base">
-          No. Our system only works with Vantage Markets accounts.
-        </p>
-      </div>
+            <div class="py-4 text-[#121212] text-sm md:text-base leading-relaxed whitespace-pre-line break-words">
+            {{ faq.Answer }}
+            </div>
+            <!-- <div class="faq-content px-5 bg-[#0000001A]">
+                <p class="py-4 text-[#121212] text-medium md:text-base">
+                {{ faq.Answer }}
+                </p>
+            </div> -->
 
-    </div>
-
+        </div>
+    {% endfor %}
   </div>
 
 </div>
 
 <script>
+  document.querySelectorAll(".faq-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      const content = toggle.nextElementSibling;
+      const icon = toggle.querySelector(".rotate-icon");
+
+      // Toggle only current item
+      content.classList.toggle("open");
+      icon.classList.toggle("open");
+    });
+  });
+</script>
+
+<!-- <script>
   document.querySelectorAll(".faq-toggle").forEach(toggle => {
     toggle.addEventListener("click", () => {
       const content = toggle.nextElementSibling;
@@ -97,5 +115,5 @@
       icon.classList.toggle("open");
     });
   });
-</script>
+</script> -->
 {% endblock %}
