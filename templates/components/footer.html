@@ -1,6 +1,7 @@
 {% load static %}
 
-<footer class="relative text-white pt-12 pb-8 mt-10 bg-gradient-to-br from-[#0b1f3a]/90 via-[#081426]/70 to-black/90 backdrop-blur-xl border-t border-white/10">
+<footer
+  class="relative text-white pt-12 pb-8 mt-10 bg-gradient-to-br from-[#0b1f3a]/90 via-[#081426]/70 to-black/90 backdrop-blur-xl border-t border-white/10">
 
   <div class="max-w-7xl mx-auto px-6">
 
@@ -60,7 +61,7 @@
           <ul class="footer-links wide">
             <li><a href="{% url 'faq' %}">FAQ</a></li>
             <li><a href="#">Our Terms</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="{% url 'privacypolicy' %}">Privacy Policy</a></li>
             <li><a href="#">Cookies</a></li>
           </ul>
         </div>
@@ -88,49 +89,50 @@
 
         <!-- SUCCESS MESSAGE (INSIDE FOOTER, NOT TOP OF PAGE) -->
         {% if messages %}
-          <div id="newsletterMsg" class="mt-4 space-y-2">
-            {% for message in messages %}
-              <div class="bg-green-600 text-white px-5 py-4 rounded-lg shadow-lg flex items-center gap-3 relative overflow-hidden">
+        <div id="newsletterMsg" class="mt-4 space-y-2">
+          {% for message in messages %}
+          <div
+            class="bg-green-600 text-white px-5 py-4 rounded-lg shadow-lg flex items-center gap-3 relative overflow-hidden">
 
-                <!-- success icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 13l4 4L19 7" />
-                </svg>
+            <!-- success icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
 
-                <span>{{ message }}</span>
+            <span>{{ message }}</span>
 
-                <!-- 5s loading line -->
-                <div class="absolute bottom-0 left-0 h-1 bg-white animate-progress"></div>
+            <!-- 5s loading line -->
+            <div class="absolute bottom-0 left-0 h-1 bg-white animate-progress"></div>
 
-              </div>
-            {% endfor %}
           </div>
+          {% endfor %}
+        </div>
         {% endif %}
 
 
         <!-- FORM -->
-        <form method="POST"
-              action="{% url 'subscribe_newsletter' %}"
-              id="newsletterForm"
-              class="flex bg-white/90 backdrop-blur rounded-lg overflow-hidden shadow-lg">
+        <form method="POST" action="{% url 'subscribe_newsletter' %}" id="newsletterForm"
+          class="flex bg-white/90 backdrop-blur rounded-lg overflow-hidden shadow-lg">
           {% csrf_token %}
           <input type="email" name="email" required placeholder="Enter email"
-                class="flex-1 px-4 py-3 text-black outline-none">
+            class="flex-1 px-4 py-3 text-black outline-none">
 
-          <button id="subscribeBtn"
-                  class="bg-blue-600 hover:bg-blue-700 px-5 text-white text-sm">
+          <button id="subscribeBtn" class="bg-blue-600 hover:bg-blue-700 px-5 text-white text-sm">
             Subscribe
           </button>
         </form>
 
         <!-- SOCIALS BELOW NEWSLETTER -->
         <div class="flex justify-center items-center space-x-5 pt-5">
-          <a href="#"><img src="{% static 'images/icon-facebook.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
-          <a href="#"><img src="{% static 'images/icon-twitter.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
-          <a href="#"><img src="{% static 'images/icon-instagram.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
-          <a href="#"><img src="{% static 'images/icon-youtube.svg' %}" class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="http://facebook.com/meektechnology"><img src="{% static 'images/icon-facebook.svg' %}"
+              class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="http://x.com/meektechnology""><img src=" {% static 'images/icon-twitter.svg' %}"
+            class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="http://instagram..com/meektechnology"><img src="{% static 'images/icon-instagram.svg' %}"
+              class="h-7 opacity-70 hover:opacity-100"></a>
+          <a href="http://youtube.com/meektechworld""><img src=" {% static 'images/icon-youtube.svg' %}"
+            class="h-7 opacity-70 hover:opacity-100"></a>
         </div>
       </div>
 
@@ -148,128 +150,131 @@
 </footer>
 
 
-  <!-- SCROLL TO TOP -->
-  <button id="scrollTopBtn"
-    class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg hidden">
-    ↑
-  </button>
+<!-- SCROLL TO TOP -->
+<button id="scrollTopBtn"
+  class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg hidden">
+  ↑
+</button>
 
 
 </footer>
 
 <style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: 0.8s ease;
+  }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: 0.8s ease;
-}
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+  /* underline hover */
+  .footer-links a {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 4px;
+    transition: .3s;
+  }
 
-/* underline hover */
-.footer-links a {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 4px;
-  transition: .3s;
-}
+  .footer-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: #38bdf8;
+    transition: .3s;
+  }
 
-.footer-links a::after {
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:0;
-  width:0%;
-  height:2px;
-  background:#38bdf8;
-  transition:.3s;
-}
+  .footer-links a:hover {
+    color: #38bdf8;
+  }
 
-.footer-links a:hover {
-  color:#38bdf8;
-}
+  .footer-links a:hover::after {
+    width: 100%;
+  }
 
-.footer-links a:hover::after {
-  width:100%;
-}
+  .footer-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #cbd5f5;
+  }
 
-.footer-title {
-  font-weight:600;
-  margin-bottom:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:#cbd5f5;
-}
-
-/* more width spacing */
-.footer-links.wide li {
-  margin-bottom:10px;
-}
-
+  /* more width spacing */
+  .footer-links.wide li {
+    margin-bottom: 10px;
+  }
 </style>
 
 <!-- Newsletter Script -->
 
 <script>
 
-/* scroll to top */
-const scrollBtn = document.getElementById("scrollTopBtn");
+  /* scroll to top */
+  const scrollBtn = document.getElementById("scrollTopBtn");
 
-window.addEventListener("scroll", () => {
-  if(window.scrollY > 400){
-    scrollBtn.classList.remove("hidden");
-  } else {
-    scrollBtn.classList.add("hidden");
-  }
-});
-
-scrollBtn.addEventListener("click", () => {
-  window.scrollTo({top:0, behavior:"smooth"});
-});
-
-
-/* auto dark/light based on system */
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.classList.add('dark');
-}
-
-/* scroll reveal */
-function reveal(){
-  document.querySelectorAll('.reveal').forEach(el=>{
-    let windowHeight = window.innerHeight;
-    let elementTop = el.getBoundingClientRect().top;
-    if(elementTop < windowHeight - 100){
-      el.classList.add('active');
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      scrollBtn.classList.remove("hidden");
+    } else {
+      scrollBtn.classList.add("hidden");
     }
   });
-}
 
-window.addEventListener('scroll', reveal);
-reveal();
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+
+  /* auto dark/light based on system */
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark');
+  }
+
+  /* scroll reveal */
+  function reveal() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      let windowHeight = window.innerHeight;
+      let elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', reveal);
+  reveal();
 
 </script>
 
 <style>
-@keyframes progressBar {
-  from { width: 100%; }
-  to { width: 0%; }
-}
+  @keyframes progressBar {
+    from {
+      width: 100%;
+    }
 
-.animate-progress {
-  animation: progressBar 5s linear forwards;
-}
+    to {
+      width: 0%;
+    }
+  }
+
+  .animate-progress {
+    animation: progressBar 5s linear forwards;
+  }
 </style>
 
 <script>
-setTimeout(() => {
-  const msg = document.getElementById("newsletterMsg");
-  if(msg){
-    msg.style.opacity = "0";
-    setTimeout(()=> msg.remove(), 500);
-  }
-}, 5000);
+  setTimeout(() => {
+    const msg = document.getElementById("newsletterMsg");
+    if (msg) {
+      msg.style.opacity = "0";
+      setTimeout(() => msg.remove(), 500);
+    }
+  }, 5000);
 </script>
