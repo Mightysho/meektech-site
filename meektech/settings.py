@@ -329,6 +329,12 @@ GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 # print("GOOGLE MAP KEY:", GOOGLE_MAPS_API_KEY)
 # print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
+
+# Open AI Configuration
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# print("OPENAI_API_KEY:", OPENAI_API_KEY)
+
 CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 
 # CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
