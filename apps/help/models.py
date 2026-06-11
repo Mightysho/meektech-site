@@ -17,31 +17,31 @@ class Faq(models.Model):
         return f"{self.Question}"
 
 
-class ChatMessage(models.Model):
-    user_id = models.CharField(max_length=100)
-    sender = models.CharField(max_length=20)  # 'user', 'ai', 'admin'
-    message = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-    session_active = models.BooleanField(default=True)
+# class ChatMessage(models.Model):
+#     user_id = models.CharField(max_length=100)
+#     sender = models.CharField(max_length=20)  # 'user', 'ai', 'admin'
+#     message = models.TextField()
+#     timestamp = models.DateTimeField(auto_now_add=True)
+#     session_active = models.BooleanField(default=True)
 
 #chat session
-
-from django.db import models
 
 class ChatSession(models.Model):
     visitor_name = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    # Human support status
     is_human_active = models.BooleanField(default=False)
 
-    # Optional: which admin/support agent is handling it
     assigned_agent = models.ForeignKey(
         'auth.User',
         on_delete=models.SET_NULL,
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return f"Chat #{self.id}"
+
 
 class ChatMessage(models.Model):
     session = models.ForeignKey(
@@ -53,3 +53,6 @@ class ChatMessage(models.Model):
     sender = models.CharField(max_length=20)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.sender}: {self.message[:50]}"
