@@ -18,6 +18,16 @@ def privacypolicy(request):
     
     
 def chat_page(request):
+
+    session_id = request.session.get("chat_session_id")
+
+    if not session_id:
+        chat_session = ChatSession.objects.create(
+            visitor_name="Guest"
+        )
+
+        request.session["chat_session_id"] = chat_session.id
+
     return render(request, "help/chat.html")
 
 
