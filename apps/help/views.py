@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Faq, ChatMessage
+from .models import Faq, ChatSession, ChatMessage
 from django.http import JsonResponse
 from .ai_chat import get_ai_response
 # Create your views here.
