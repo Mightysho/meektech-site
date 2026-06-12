@@ -27,7 +27,9 @@ class Faq(models.Model):
 #chat session
 
 class ChatSession(models.Model):
-    visitor_name = models.CharField(max_length=100, blank=True)
+
+    visitor_name = models.CharField(max_length=100)
+    visitor_email = models.EmailField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     is_human_active = models.BooleanField(default=False)

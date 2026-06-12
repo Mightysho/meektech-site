@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Support Dashboard</h2>
+
+{% for session in sessions %}
+
+<div>
+
+    <h4>
+        Chat #{{ session.id }}
+    </h4>
+
+    <p>
+        Human Active:
+        {{ session.is_human_active }}
+    </p>
+
+    <a href="/support-chat/{{session.id}}/">
+        Open Chat
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
