@@ -32,25 +32,45 @@ def chat_page(request):
 
 
 #Chat API Endpoint
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def send_message(request):
+
     if request.method == "POST":
+
+        session_id = request.session.get("chat_session_id")
+
+        chat_session = ChatSession.objects.get(
+            id=session_id
+        )
+
         user_msg = request.POST.get("message")
 
-        # save user message
         ChatMessage.objects.create(
-            user_id="guest",
+            session=chat_session,
             sender="user",
             message=user_msg
         )
 
-        # AI reply
+        # HUMAN SUPPORT ACTIVE
+        if chat_session.is_human_active:
+
+            return JsonResponse({
+                "reply": "A support agent has joined the conversation and will reply shortly.",
+                "human": True
+            })
+
+        # AI RESPONSE
         ai_reply = get_ai_response(user_msg)
 
         ChatMessage.objects.create(
-            user_id="guest",
+            session=chat_session,
             sender="ai",
             message=ai_reply
         )
 
-        return JsonResponse({"reply": ai_reply})
+        return JsonResponse({
+            "reply": ai_reply,
+            "human": False
+        })
