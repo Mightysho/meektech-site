@@ -74,3 +74,37 @@ def send_message(request):
             "reply": ai_reply,
             "human": False
         })
+
+
+def activate_human_support(request, session_id):
+
+    session = ChatSession.objects.get(id=session_id)
+
+    session.is_human_active = True
+    session.assigned_agent = request.user
+    session.save()
+
+    return JsonResponse({
+        "success": True
+    })
+
+
+@csrf_exempt
+def request_human_support(request):
+
+    session_id = request.session.get(
+        "chat_session_id"
+    )
+
+    session = ChatSession.objects.get(
+        id=session_id
+    )
+
+    session.is_human_active = True
+    session.save()
+
+    return JsonResponse({
+        "message": "Human support requested."
+    })
+
+

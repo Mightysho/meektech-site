@@ -15,15 +15,3 @@ def get_ai_response(message):
     return response.choices[0].message.content
 
 
-def activate_human_support(request, session_id):
-
-    session = ChatSession.objects.get(id=session_id)
-
-    session.is_human_active = True
-    session.assigned_agent = request.user
-    session.save()
-
-    return JsonResponse({
-        "success": True
-    })
-
