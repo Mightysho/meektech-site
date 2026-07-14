@@ -116,66 +116,6 @@ def send_campaign_emails(campaign, subscribers):
     campaign.sent_time = timezone.now()
     campaign.save()
 
-# from django.shortcuts import render, redirect
-# from django.utils import timezone
-# from django.contrib import messages
-# from django.conf import settings
-# from django.core.mail import EmailMultiAlternatives
-# from django.urls import reverse
-# from .models import NewsletterRecipient, NewsletterCampaign
-
-# def send_campaign_emails(campaign, subscribers):
-
-#     for subscriber in subscribers:
-
-#         recipient = NewsletterRecipient.objects.create(
-#             campaign=campaign,
-#             subscriber=subscriber,
-#             sent=False
-#         )
-
-#         try:
-#             # Build unsubscribe link
-#             unsubscribe_path = reverse(
-#                 "unsubscribe",
-#                 kwargs={"token": sub.unsubscribe_token}
-#             )
-
-#             unsubscribe_link = f"{settings.SITE_URL}{unsubscribe_path}"
-
-#             # Append unsubscribe to HTML BEFORE sending
-#             html_with_unsubscribe = f"""
-#                 {campaign.body_html}
-#                 <br><br>
-#                 <p style="font-size:12px; color:gray;">
-#                     If you no longer wish to receive these emails,
-#                     <a href="{unsubscribe_link}">Unsubscribe here</a>.
-#                 </p>
-#             """
-
-#             email = EmailMultiAlternatives(
-#                 subject=campaign.subject,
-#                 body="This email requires HTML support.",
-#                 from_email=settings.DEFAULT_FROM_EMAIL,
-#                 to=[subscriber.email],
-#                 reply_to=[campaign.reply_to] if campaign.reply_to else None,
-#             )
-
-#             email.attach_alternative(campaign.body_html, "text/html")
-#             email.send(fail_silently=False)
-
-#             recipient.sent = True
-#             recipient.sent_time = timezone.now()
-#             recipient.save()
-
-#         except Exception as e:
-#             recipient.sent = False
-#             recipient.error_message = str(e)
-#             recipient.save()
-    
-#     campaign.sent_time = timezone.now()
-#     campaign.save()
-
 
 from django.utils import timezone
 from datetime import datetime
