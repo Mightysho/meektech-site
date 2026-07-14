@@ -21,12 +21,7 @@ from django.urls import path, include
 from apps.core import views  # import your home view
 from apps.core.dashboards import admin_dashboard
 from django.conf import settings
-from django.conf.urls.static import static
-# from portals.client_portal.urls import urlpatterns
-# from portals.staff_portal.urls import path, include
-# from portals.intern_portal.urls import path, include
 from apps.newsletter.views import subscribe_newsletter
-# from accounts.views import login_view
 
 
 urlpatterns = [
@@ -37,15 +32,9 @@ urlpatterns = [
     path("api/visitor-location/", views.report_location, name="report_location"),  # API endpoint for gps location reporting
     path("admin/dashboard/", admin_dashboard, name="admin_dashboard"),
     path("contact/", views.contact, name="contact"),
-    # path("client/", include("client_portal.urls")),
-    # path("staff/", include("staff_portal.urls")),
-    # path("intern/", include("intern_portal.urls")),
     path("subscribe-newsletter/", subscribe_newsletter, name="subscribe_newsletter"),
     path("", include("apps.newsletter.urls")),
     path('', include('apps.help.urls')),
-    path("client/", lambda r: login_view(r, "CLIENT"), name="client_login"),
-    path("staff/", lambda r: login_view(r, "STAFF"), name="staff_login"),
-    path("intern/", lambda r: login_view(r, "INTERN"), name="intern_login"),
 ]
 
 

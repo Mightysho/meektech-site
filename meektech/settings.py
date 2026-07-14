@@ -71,19 +71,7 @@ INSTALLED_APPS = [
 
     # meektech apps
     "apps.core",
-    # "accounts",
-    # "client",
-    # "staff",
-    # "intern",
-    # "portals.staff_portal",
-    # "portals.intern_portal",
     "apps.help",
-    "apps.about",
-    "apps.blog",
-    "apps.careers",
-    "apps.projects",
-    "apps.services",
-    "apps.solutions",
     "apps.newsletter",
 
     # tailwind
@@ -337,12 +325,3 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 CKEDITOR_UPLOAD_PATH = 'ckeditor/'
 
-# CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
-
-# CELERY_BROKER_URL = "filesystem://"
-
-# CELERY_BROKER_TRANSPORT_OPTIONS = {
-#     "data_folder_in": os.path.join(BASE_DIR, "celery", "in"),
-#     "data_folder_out": os.path.join(BASE_DIR, "celery", "out"),
-#     "data_folder_processed": os.path.join(BASE_DIR, "celery", "processed"),
-# }
